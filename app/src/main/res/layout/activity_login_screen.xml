@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="LOGIN"
+        android:padding="12dp"
+        android:gravity="center"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="25dp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@drawable/edit_border"
+        android:padding="12dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:hint="Enter Email"
+        android:inputType="textEmailAddress"/>
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@drawable/edit_border"
+        android:padding="12dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:hint="Enter Password"
+        android:layout_marginTop="15dp"
+        android:inputType="textPassword"/>
+
+    <TextView
+        android:id="@+id/tvFpassword"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Forgot Password"
+        android:padding="8dp"
+        android:gravity="right"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="25dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/tvSignIn"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="SignIn"
+        android:padding="12dp"
+        android:gravity="center"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="25dp"
+        android:textColor="#FFF"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:background="@drawable/btn_border"
+        />
+
+
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text=""
+        android:padding="12dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="25dp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:gravity="right"
+        />
+
+</LinearLayout>

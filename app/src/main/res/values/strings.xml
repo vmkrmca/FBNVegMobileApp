@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">NVeg</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="red">RED</string>
+    <string name="blue">BLUE</string>
+    <string name="green">GREEN</string>
+
+
+    <string name="action_search">Search</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="nav_item_home">Home</string>
+    <string name="nav_item_order">Order By Categories</string>
+    <string name="nav_item_hotdeals">Hot Deals</string>
+    <string name="nav_item_orderoffers">Order By Offers</string>
+    <string name="nav_item_nveg">NVeg</string>
+    <string name="nav_item_invite">Invite</string>
+    <string name="nav_item_rateus">RateUs</string>
+    <string name="nav_item_feedback">Feedback</string>
+    <string name="nav_item_share">Share</string>
+    <string name="nav_item_aboutus">AboutUs</string>
+    <string name="nav_item_help">Help</string>
+    <string name="nav_item_contactus">ContactUs</string>
+    <string name="nav_item_logout">Logout</string>
+
+
+
+    <!-- navigation drawer item labels  -->
+    <string-array name="nav_drawer_labels">
+        <item>@string/nav_item_home</item>
+        <item>@string/nav_item_order</item>
+        <item>@string/nav_item_hotdeals</item>
+        <item>@string/nav_item_orderoffers</item>
+        <item>@string/nav_item_nveg</item>
+        <item>@string/nav_item_invite</item>
+        <item>@string/nav_item_rateus</item>
+        <item>@string/nav_item_feedback</item>
+        <item>@string/nav_item_share</item>
+        <item>@string/nav_item_aboutus</item>
+        <item>@string/nav_item_help</item>
+        <item>@string/nav_item_contactus</item>
+        <item>@string/nav_item_logout</item>
+
+
+    </string-array>
+
+    <string name="title_home">Home</string>
+    <string name="title_ocategory">OrderByCategory</string>
+    <string name="title_hotdeals">HotDeals</string>
+    <string name="title_offers">Offers</string>
+    <string name="title_nveg">NVeg</string>
+    <string name="title_invite">Invite</string>
+    <string name="title_rate">RateUS</string>
+    <string name="title_feedback">Feedback</string>
+    <string name="title_share">Share</string>
+    <string name="title_about">AboutUs</string>
+    <string name="title_help">Help</string>
+    <string name="title_contact">ContactUs</string>
+</resources>

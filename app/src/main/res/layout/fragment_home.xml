@@ -29,6 +29,7 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvCatgories"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
@@ -39,6 +40,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.1"
         android:layout_width="match_parent"
+        android:background="@android:color/darker_gray"
         android:orientation="horizontal">
 
         <ImageView
@@ -46,36 +48,36 @@
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="0.25"
-
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/home_icon"
             />
+
         <ImageView
             android:id="@+id/ivFav"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="0.25"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/fav"
             />
         <ImageView
             android:id="@+id/ivCart"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="0.25"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/cart"
             />
         <ImageView
             android:id="@+id/ivNotifications"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="0.25"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/notification"
             />
         <ImageView
             android:id="@+id/ivProfile"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="0.25"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/user"
             />
 
 

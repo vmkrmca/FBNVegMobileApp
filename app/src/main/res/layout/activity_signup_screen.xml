@@ -2,18 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    >
 
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text="REGISTER"
         android:padding="12dp"
+        android:textColorHint="#FFF"
         android:gravity="center"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="15dp"
         android:layout_marginRight="25dp"
-        android:textColor="#000"
+        android:textColor="#FFF"
         android:textStyle="bold"
         android:textSize="22sp"
         />
@@ -24,6 +27,7 @@
         android:layout_width="match_parent"
         android:background="@drawable/edit_border"
         android:padding="12dp"
+        android:textColorHint="#FFF"
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
         android:hint="Enter UserName"
@@ -38,6 +42,7 @@
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
         android:hint="Enter Email"
+        android:textColorHint="#FFF"
         android:layout_marginTop="5dp"
         android:inputType="textEmailAddress"/>
     <EditText
@@ -46,6 +51,7 @@
         android:layout_width="match_parent"
         android:background="@drawable/edit_border"
         android:padding="12dp"
+        android:textColorHint="#FFF"
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
         android:hint="Enter Password"
@@ -60,6 +66,7 @@
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
         android:hint="Enter Confirm Password"
+        android:textColorHint="#FFF"
         android:layout_marginTop="5dp"
         android:inputType="textPassword"/>
 
@@ -73,6 +80,7 @@
         android:layout_marginLeft="25dp"
         android:hint="Enter MobileNumber"
         android:layout_marginTop="5dp"
+        android:textColorHint="#FFF"
         android:inputType="phone"/>
 
     <LinearLayout
@@ -94,7 +102,7 @@
             android:layout_width="match_parent"
             android:text="I Agree Terms and Conditions"
             android:padding="12dp"
-            android:textColor="#000"
+            android:textColor="#FFF"
             android:gravity="left"
             />
         </LinearLayout>
@@ -129,8 +137,6 @@
         android:textSize="12sp"
         android:gravity="right"
         />
-
-
 
 
 </LinearLayout>

@@ -28,7 +28,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
     private ViewPager _mViewPager;
     private ImageViewPagerAdapter _adapter;
     ImageView ivHome, ivFav, ivCart, ivNotifications, ivProfile;
-    RecyclerView rvCatgories;
+    RecyclerView recyclerView;
 
     private final String android_version_names[] = {
             "Donut",
@@ -60,7 +60,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
         ivNotifications = (ImageView)view. findViewById(R.id.ivNotifications);
         ivProfile = (ImageView) view.findViewById(R.id.ivProfile);
 
-        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.rvCatgories);
+        recyclerView = (RecyclerView)view.findViewById(R.id.rvCatgories);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.setLayoutManager(layoutManager);
@@ -119,7 +119,8 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
                 break;
         }
 
-        if (fragment != null) {
+        if (fragment != null)
+        {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment);

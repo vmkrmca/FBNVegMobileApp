@@ -38,7 +38,7 @@
         <item>@string/nav_item_invite</item>
         <item>@string/nav_item_rateus</item>
         <item>@string/nav_item_feedback</item>
-        <item>@string/nav_item_share</item>
+
         <item>@string/nav_item_aboutus</item>
         <item>@string/nav_item_help</item>
         <item>@string/nav_item_contactus</item>
@@ -55,8 +55,14 @@
     <string name="title_invite">Invite</string>
     <string name="title_rate">RateUS</string>
     <string name="title_feedback">Feedback</string>
-    <string name="title_share">Share</string>
+
     <string name="title_about">AboutUs</string>
     <string name="title_help">Help</string>
     <string name="title_contact">ContactUs</string>
+
+
+
+    <string name="facebook_app_id">957143471052541</string>
+
+
 </resources>

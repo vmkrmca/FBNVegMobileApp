@@ -20,6 +20,7 @@ public class OffersFragment extends android.support.v4.app.Fragment
 
         View view = inflater.inflate(R.layout.fragment_offers_fragment,null);
         setHasOptionsMenu(true);
+
         return view;
     }
 

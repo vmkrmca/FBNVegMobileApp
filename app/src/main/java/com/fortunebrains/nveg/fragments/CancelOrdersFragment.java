@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -37,11 +38,20 @@ public class CancelOrdersFragment extends android.support.v4.app.Fragment
         recyclerViews.setLayoutManager(mLayoutManager);
         recyclerViews.setItemAnimator(new DefaultItemAnimator());
         recyclerViews.setAdapter(mAdapter);
+        setHasOptionsMenu(true);
         prepareMyOrderData();
         return view;
     }
 
 
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        menu.findItem(R.id.action_search).setVisible(false);
+        menu.findItem(R.id.action_searchOne).setVisible(false);
+        menu.findItem(R.id.action_settings).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+    }
     private void prepareMyOrderData() {
 
         MyCancelOrders myOrder = new MyCancelOrders();

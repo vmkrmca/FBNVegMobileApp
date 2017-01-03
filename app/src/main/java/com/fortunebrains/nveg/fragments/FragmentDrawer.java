@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import com.fortunebrains.nveg.R;
 import com.fortunebrains.nveg.adapters.NavigationDrawerAdapter;
 import com.fortunebrains.nveg.common.NavDrawerItem;
+import com.fortunebrains.nveg.common.SimpleDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +77,7 @@ public class FragmentDrawer extends Fragment {
         adapter = new NavigationDrawerAdapter(getActivity(), getData());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {

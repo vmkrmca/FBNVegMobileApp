@@ -1,23 +1,30 @@
 package com.fortunebrains.nveg.fragments;
 
-import android.app.ActionBar;import android.os.Bundle;
+import android.app.ActionBar;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fortunebrains.nveg.R;
+import com.fortunebrains.nveg.common.RoundedImageView;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by sree on 12/21/2016.
  */
 public class ProfileFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
+    SharedPreferences sharedPreferences;
     android.app.ActionBar actionBar;
+    RoundedImageView rvProfilePic;
     TextView tvVegID,tvGCustomer,tvMyOrders,tvCancelOrders,tvWallet,tvEditProfile,tvChangePassword,tvViewProfile,tvAddAddress;
     @Nullable
     @Override
@@ -30,12 +37,13 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
         tvCancelOrders = (TextView) view.findViewById(R.id.tvCancelOrders);
         tvWallet = (TextView) view.findViewById(R.id.tvWallet);
         tvEditProfile = (TextView) view.findViewById(R.id.tvEditProfile);
+        rvProfilePic = (RoundedImageView) view.findViewById(R.id.rvProfilePic);
         tvChangePassword = (TextView) view.findViewById(R.id.tvChangePassword);
         tvVegID = (TextView) view.findViewById(R.id.tvVegID);
         tvViewProfile = (TextView) view.findViewById(R.id.tvViewProfile);
         tvAddAddress = (TextView) view.findViewById(R.id.tvAddAddress);
 
-
+        sharedPreferences = getActivity().getSharedPreferences("prefName",getActivity().MODE_APPEND);
 
         tvGCustomer.setOnClickListener(this);
         tvMyOrders.setOnClickListener(this);
@@ -45,11 +53,24 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
         tvChangePassword.setOnClickListener(this);
         tvViewProfile.setOnClickListener(this);
         tvAddAddress.setOnClickListener(this);
-
-
+        String uri = sharedPreferences.getString("URI",null);
+        String name = sharedPreferences.getString("NAME",null);
+        int key = sharedPreferences.getInt("KEY",0);
+        setHasOptionsMenu(true);
+        Picasso.with(getActivity()).load(uri).into(rvProfilePic);
 
         return view;
 
+    }
+
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        menu.findItem(R.id.action_search).setVisible(false);
+        menu.findItem(R.id.action_searchOne).setVisible(false);
+        menu.findItem(R.id.action_settings).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -84,6 +105,16 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
                 fragment = new ChangePasswordFragment();
                 title ="ChangePassword";
                 break;
+            case R.id.tvViewProfile:
+                fragment = new ViewProfileFragment();
+                title ="ChangePassword";
+                break;
+
+            case R.id.tvAddAddress:
+                fragment = new AddAddressFragment();
+                title ="ChangePassword";
+                break;
+
         }
 
         if (fragment != null) {
@@ -92,9 +123,6 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
             fragmentTransaction.replace(R.id.container_body, fragment);
             fragmentTransaction.commit();
         }
-
-
-
 
     }
 

@@ -5,11 +5,11 @@
         android:radius="10dp"
         />
     <gradient
-        android:startColor="@color/white"
-        android:endColor="@color/white"
+        android:startColor="@color/colorPrimaryDark"
+        android:endColor="@color/colorPrimaryDark"
         />
     <stroke
         android:width="3dp"
-        android:color="@color/colorPrimaryDark"
+        android:color="@color/white"
         />
 </shape>

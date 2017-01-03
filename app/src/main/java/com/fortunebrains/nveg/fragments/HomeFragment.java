@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,11 @@ import android.widget.ImageView;
 
 import com.fortunebrains.nveg.R;
 import com.fortunebrains.nveg.activities.DashBoardActivity;
+import com.fortunebrains.nveg.adapters.CategoryAdapter;
 import com.fortunebrains.nveg.adapters.ImageViewPagerAdapter;
+import com.fortunebrains.nveg.common.Category;
+
+import java.util.ArrayList;
 
 /**
  * Created by sree on 12/21/2016.
@@ -22,6 +28,26 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
     private ViewPager _mViewPager;
     private ImageViewPagerAdapter _adapter;
     ImageView ivHome, ivFav, ivCart, ivNotifications, ivProfile;
+    RecyclerView rvCatgories;
+
+    private final String android_version_names[] = {
+            "Donut",
+            "Eclair",
+            "Froyo",
+            "Gingerbread",
+            "Honeycomb",
+            "Ice Cream Sandwich",
+            "Jelly Bean",
+            "KitKat"
+
+    };
+
+    int categoryImages[] = {
+            R.mipmap.ic_launcher,R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher,R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher,R.mipmap.ic_launcher,
+            R.mipmap.ic_launcher,R.mipmap.ic_launcher};
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,6 +59,15 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
         ivFav = (ImageView) view.findViewById(R.id.ivFav);
         ivNotifications = (ImageView)view. findViewById(R.id.ivNotifications);
         ivProfile = (ImageView) view.findViewById(R.id.ivProfile);
+
+        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.rvCatgories);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
+        recyclerView.setLayoutManager(layoutManager);
+
+        ArrayList<Category> categoryArrayList = prepareData();
+        CategoryAdapter adapter = new CategoryAdapter(getActivity(),categoryArrayList);
+        recyclerView.setAdapter(adapter);
 
         ivHome.setOnClickListener(this);
         ivFav.setOnClickListener(this);
@@ -46,6 +81,16 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
         return view;
     }
 
+    private ArrayList<Category> prepareData(){
+
+        ArrayList<Category> categoryArrayList = new ArrayList<>();
+        for(int i=0;i<android_version_names.length;i++){
+            Category category = new Category();
+            category.setCategoryImage(categoryImages[i]);
+            categoryArrayList.add(category);
+        }
+        return categoryArrayList;
+    }
     @Override
     public void onClick(View v) {
 

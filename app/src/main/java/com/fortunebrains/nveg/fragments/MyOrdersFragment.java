@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -38,7 +39,18 @@ public class MyOrdersFragment extends android.support.v4.app.Fragment
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
         prepareMyOrderData();
+        setHasOptionsMenu(true);
         return view;
+    }
+
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        menu.findItem(R.id.action_search).setVisible(false);
+        menu.findItem(R.id.action_searchOne).setVisible(false);
+        menu.findItem(R.id.action_settings).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
     }
 
     private void prepareMyOrderData() {

@@ -97,7 +97,7 @@ public class ShoppingActivity extends AppCompatActivity implements FragmentDrawe
         Log.i("KEY ::",""+key);
 
 
-        Picasso.with(getApplicationContext()).load(uri).into(rvProfilePic);
+        Picasso.with(getApplicationContext()).load(uri).resize(150,150).into(rvProfilePic);
     }
 
     private void displayView(int position) {
@@ -112,47 +112,45 @@ public class ShoppingActivity extends AppCompatActivity implements FragmentDrawe
                 fragment = new CategoryFragment();
                 title = getString(R.string.title_ocategory);
                 break;
-            case 2:
+            case 7:
                 fragment = new HotDealsFragment();
                 title = getString(R.string.title_hotdeals);
                 break;
-            case 3:
+            case 11:
                 fragment = new OffersFragment();
                 title = getString(R.string.title_offers);
                 break;
-            case 4:
+            case 12:
                 fragment = new NVegFragment();
                 title = getString(R.string.title_nveg);
                 break;
-            case 5:
+            case 13:
                inviteUs();
                 break;
-            case 6:
+            case 14:
                 fragment = new RateUsFragment();
                 title = getString(R.string.title_rate);
                 break;
-            case 7:
+            case 15:
                 fragment = new FeedbackFragment();
                 title = getString(R.string.title_feedback);
                 break;
 
-            case 8:
+            case 16:
                 fragment = new AboutUsFragment();
                 title = getString(R.string.title_about);
                 break;
-            case 9:
+            case 17:
                 fragment = new HelpFragment();
                 title = getString(R.string.title_help);
                 break;
-            case 10:
+            case 18:
                 fragment = new ContactUsFragment();
                 title = getString(R.string.title_contact);
                 break;
-            case 11:
+            case 19:
                 logout();
                 break;
-
-
             default:
                 break;
         }
@@ -209,7 +207,6 @@ public class ShoppingActivity extends AppCompatActivity implements FragmentDrawe
                                 }
                             });
                 }
-
             }
         });
         adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -219,12 +216,7 @@ public class ShoppingActivity extends AppCompatActivity implements FragmentDrawe
                 dialog.dismiss();
             }
         });
-
-
         adb.show();
-
-
-
     }
 
     @Override
@@ -232,7 +224,6 @@ public class ShoppingActivity extends AppCompatActivity implements FragmentDrawe
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -245,11 +236,8 @@ public class ShoppingActivity extends AppCompatActivity implements FragmentDrawe
     }
 
     @Override
-    public void onDrawerItemSelected(View view, int position) {
+    public void onDrawerItemSelected(View view, int position)
+    {
         displayView(position);
     }
-
-
-
-
 }

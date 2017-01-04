@@ -13,8 +13,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.fortunebrains.nveg.R;
+import com.fortunebrains.nveg.adapters.ExpandableListAdapter;
 import com.fortunebrains.nveg.adapters.NavigationDrawerAdapter;
 import com.fortunebrains.nveg.common.NavDrawerItem;
 import com.fortunebrains.nveg.common.SimpleDividerItemDecoration;
@@ -75,13 +77,42 @@ public class FragmentDrawer extends Fragment {
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
 
         adapter = new NavigationDrawerAdapter(getActivity(), getData());
-        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
+
+        List<ExpandableListAdapter.Item> data = new ArrayList<>();
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "Home"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "Order By Categories"));
+
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Chicken"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Mutton"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Sea Food"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Eggs"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Exotic Meats"));
+
+
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "Hot Deals"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "NVeg Coupons"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Today Special"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Bulk Buy"));
+
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "Order by Offers"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "NVeg"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "Invite"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "RateUs"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "Feedback"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "AboutUs"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "Help"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "Contact Us"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "Logout"));
+        recyclerView.setAdapter(new ExpandableListAdapter(data));
+
+       recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
-            public void onClick(View view, int position) {
+            public void onClick(View view, int position)
+            {
                 drawerListener.onDrawerItemSelected(view, position);
+                Toast.makeText(getActivity(),""+position,Toast.LENGTH_SHORT).show();
                 mDrawerLayout.closeDrawer(containerView);
             }
 
@@ -179,7 +210,8 @@ public class FragmentDrawer extends Fragment {
 
     }
 
-    public interface FragmentDrawerListener {
+    public interface FragmentDrawerListener
+    {
         public void onDrawerItemSelected(View view, int position);
     }
 }

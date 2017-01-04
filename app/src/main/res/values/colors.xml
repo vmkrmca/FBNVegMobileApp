@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#204069</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#FFFFFF</color>
-
+    <color name="app_blue">#045CB1</color>
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>

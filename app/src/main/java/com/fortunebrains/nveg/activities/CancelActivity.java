@@ -1,14 +1,15 @@
-package com.fortunebrains.nveg.fragments;
+package com.fortunebrains.nveg.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.fortunebrains.nveg.R;
 import com.fortunebrains.nveg.adapters.MyCancelAdapter;
@@ -18,40 +19,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by sree on 12/21/2016.
+ * Created by sree on 1/5/2017.
  */
-public class CancelOrdersFragment extends android.support.v4.app.Fragment
-{
+public class CancelActivity extends AppCompatActivity implements View.OnClickListener {
     private List<MyCancelOrders> myCancelOrdersArrayList = new ArrayList<>();
     private RecyclerView recyclerViews;
     private MyCancelAdapter mAdapter;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cancel);
 
-        View view = inflater.inflate(R.layout.fragment_cancelorder,null);
-        recyclerViews = (RecyclerView) view.findViewById(R.id.recycler_view);
+        android.support.v7.app.ActionBar mActionBar = getSupportActionBar();
+        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setDisplayShowTitleEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(this);
+
+        View mCustomView = mInflater.inflate(R.layout.custom_action_bar, null);
+
+        ImageView ivBack = (ImageView) mCustomView.findViewById(R.id.ivBack);
+        ivBack.setOnClickListener(this);
+        TextView tvTitle = (TextView) mCustomView.findViewById(R.id.tvTitle);
+        tvTitle.setText("   Cancel Orders");
+        mActionBar.setCustomView(mCustomView);
+        mActionBar.setDisplayShowCustomEnabled(true);
+
+        recyclerViews = (RecyclerView) findViewById(R.id.recycler_view);
 
         mAdapter = new MyCancelAdapter(myCancelOrdersArrayList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViews.setLayoutManager(mLayoutManager);
         recyclerViews.setItemAnimator(new DefaultItemAnimator());
         recyclerViews.setAdapter(mAdapter);
-        setHasOptionsMenu(true);
         prepareMyOrderData();
-        return view;
     }
 
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.action_search).setVisible(false);
-        menu.findItem(R.id.action_searchOne).setVisible(false);
-        menu.findItem(R.id.action_settings).setVisible(false);
-        super.onPrepareOptionsMenu(menu);
-    }
     private void prepareMyOrderData() {
 
         MyCancelOrders myOrder = new MyCancelOrders();
@@ -96,5 +99,10 @@ public class CancelOrdersFragment extends android.support.v4.app.Fragment
 
         mAdapter.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        finish();
     }
 }

@@ -7,17 +7,21 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.fortunebrains.nveg.R;
 import com.fortunebrains.nveg.activities.DashBoardActivity;
 import com.fortunebrains.nveg.adapters.CategoryAdapter;
 import com.fortunebrains.nveg.adapters.ImageViewPagerAdapter;
 import com.fortunebrains.nveg.common.Category;
+import com.fortunebrains.nveg.common.DividerItemDecoration;
 
 import java.util.ArrayList;
 
@@ -28,7 +32,7 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
     private ViewPager _mViewPager;
     private ImageViewPagerAdapter _adapter;
     ImageView ivHome, ivFav, ivCart, ivNotifications, ivProfile;
-    RecyclerView recyclerView;
+    GridView gridView;
 
     private final String android_version_names[] = {
             "Donut",
@@ -43,10 +47,10 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
     };
 
     int categoryImages[] = {
-            R.mipmap.ic_launcher,R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher,R.mipmap.ic_launcher};
+            R.mipmap.chicken,R.mipmap.chicken_image,
+            R.mipmap.fish,R.mipmap.clarge,
+            R.mipmap.chicken,R.mipmap.chicken_image,
+            R.mipmap.fish,R.drawable.clarge};
 
     @Nullable
     @Override
@@ -60,14 +64,13 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
         ivNotifications = (ImageView)view. findViewById(R.id.ivNotifications);
         ivProfile = (ImageView) view.findViewById(R.id.ivProfile);
 
-        recyclerView = (RecyclerView)view.findViewById(R.id.rvCatgories);
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
-        recyclerView.setLayoutManager(layoutManager);
-
-        ArrayList<Category> categoryArrayList = prepareData();
+        gridView = (GridView) view.findViewById(R.id.gvCategories);
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),LinearLayoutManager.VERTICAL);
+//        recyclerView.addItemDecoration(dividerItemDecoration);
+        final ArrayList<Category> categoryArrayList = prepareData();
         CategoryAdapter adapter = new CategoryAdapter(getActivity(),categoryArrayList);
-        recyclerView.setAdapter(adapter);
+        gridView.setAdapter(adapter);
+
 
         ivHome.setOnClickListener(this);
         ivFav.setOnClickListener(this);

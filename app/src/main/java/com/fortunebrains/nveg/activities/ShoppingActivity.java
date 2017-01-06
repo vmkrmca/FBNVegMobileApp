@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
@@ -54,12 +56,13 @@ public class ShoppingActivity extends AppCompatActivity implements FragmentDrawe
     GoogleApiClient mGoogleApiClient;
     private FragmentDrawer drawerFragment;
     int key;
+    boolean val = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_screen);
-        sharedPreferences = getSharedPreferences("prefName",MODE_APPEND);
+        sharedPreferences = getSharedPreferences("prefName", MODE_APPEND);
         rvProfilePic = (RoundedImageView) findViewById(R.id.rvProfilePic);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -88,16 +91,16 @@ public class ShoppingActivity extends AppCompatActivity implements FragmentDrawe
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        String uri = sharedPreferences.getString("URI",null);
-        String name = sharedPreferences.getString("NAME",null);
-         key = sharedPreferences.getInt("KEY",0);
+        String uri = sharedPreferences.getString("URI", null);
+        String name = sharedPreferences.getString("NAME", null);
+        key = sharedPreferences.getInt("KEY", 0);
 
-        Log.i("uri ::",""+uri);
-        Log.i("Name ::",""+name);
-        Log.i("KEY ::",""+key);
+        Log.i("uri ::", "" + uri);
+        Log.i("Name ::", "" + name);
+        Log.i("KEY ::", "" + key);
 
 
-        Picasso.with(getApplicationContext()).load(uri).resize(150,150).into(rvProfilePic);
+        Picasso.with(getApplicationContext()).load(uri).resize(150, 150).into(rvProfilePic);
     }
 
     private void displayView(int position) {
@@ -125,7 +128,7 @@ public class ShoppingActivity extends AppCompatActivity implements FragmentDrawe
                 title = getString(R.string.title_nveg);
                 break;
             case 13:
-               inviteUs();
+                inviteUs();
                 break;
             case 14:
                 fragment = new RateUsFragment();
@@ -176,33 +179,27 @@ public class ShoppingActivity extends AppCompatActivity implements FragmentDrawe
         startActivity(Intent.createChooser(sharingIntent, "Sharing"));
     }
 
-    private void logout()
-    {
-        AlertDialog.Builder adb  =new AlertDialog.Builder(ShoppingActivity.this);
+    private void logout() {
+        AlertDialog.Builder adb = new AlertDialog.Builder(ShoppingActivity.this);
         adb.setMessage("Do You Want to Logout or Not");
         adb.setTitle("LOGOUT");
         adb.setIcon(R.mipmap.ic_launcher);
 
         adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-                if (key == 1001)
-                {
+            public void onClick(DialogInterface dialog, int which) {
+                if (key == 1001) {
                     FacebookSdk.sdkInitialize(getApplicationContext());
                     LoginManager.getInstance().logOut();
-                    startActivity(new Intent(getApplicationContext(),DashBoardActivity.class));
+                    startActivity(new Intent(getApplicationContext(), DashBoardActivity.class));
                     finish();
 
-                }
-                else
-                {
+                } else {
                     Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                             new ResultCallback<Status>() {
                                 @Override
-                                public void onResult(Status status)
-                                {
-                                    startActivity(new Intent(getApplicationContext(),DashBoardActivity.class));
+                                public void onResult(Status status) {
+                                    startActivity(new Intent(getApplicationContext(), DashBoardActivity.class));
                                     finish();
                                 }
                             });
@@ -224,20 +221,41 @@ public class ShoppingActivity extends AppCompatActivity implements FragmentDrawe
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_filter)
+        {
+            startActivity(new Intent(getApplicationContext(),FilterActivity.class));
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
     @Override
-    public void onDrawerItemSelected(View view, int position)
-    {
+    public void onDrawerItemSelected(View view, int position) {
         displayView(position);
+    }
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            //Ask the user if they want to quit
+            new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("QUIT APP")
+                    .setMessage("Do You want to Reallly Quit the App")
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("NO", null)
+                    .show();
+        }
     }
 }

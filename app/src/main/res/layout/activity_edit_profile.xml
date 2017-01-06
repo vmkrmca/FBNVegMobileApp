@@ -5,18 +5,6 @@
 
 
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="Edit Profile"
-        android:gravity="center"
-        android:textColor="#000"
-        android:textStyle="bold"
-        android:textSize="25sp"
-        android:layout_margin="25dp"
-        android:padding="12dp"
-
-        />
 
 
     <LinearLayout
@@ -45,7 +33,7 @@
             android:background="@drawable/edit_border"
             android:inputType="textPersonName"
             android:padding="8dp" />
-        </LinearLayout>
+    </LinearLayout>
 
 
     <LinearLayout

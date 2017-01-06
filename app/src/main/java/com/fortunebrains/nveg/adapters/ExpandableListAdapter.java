@@ -2,6 +2,7 @@ package com.fortunebrains.nveg.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,15 +64,23 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 final ListHeaderViewHolder itemController = (ListHeaderViewHolder) holder;
                 itemController.refferalItem = item;
                 itemController.header_title.setText(item.text);
+                Log.i("",item.text);
 
-                if (item.invisibleChildren == null) {
+                if (item.invisibleChildren == null)
+                {
+
                     itemController.btn_expand_toggle.setImageResource(R.drawable.circle_minus);
-                } else {
+//                    itemController.btn_expand_toggle.setVisibility(View.INVISIBLE);
+
+                } else
+                {
+                    Log.i("",""+item.invisibleChildren.size());
                     itemController.btn_expand_toggle.setImageResource(R.drawable.circle_plus);
                 }
                 itemController.btn_expand_toggle.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(View v)
+                    {
                         if (item.invisibleChildren == null) {
                             item.invisibleChildren = new ArrayList<Item>();
                             int count = 0;

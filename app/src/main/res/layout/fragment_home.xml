@@ -28,12 +28,16 @@
         android:layout_width="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvCatgories"
-            android:layout_width="match_parent"
+        <GridView
             android:layout_height="match_parent"
-            />
-
+            android:id="@+id/gvCategories"
+            android:layout_width="match_parent"
+            android:numColumns="2"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_border"
+            android:horizontalSpacing="5dp"
+            android:verticalSpacing="5dp">
+        </GridView>
     </LinearLayout>
 
     <LinearLayout
@@ -48,36 +52,76 @@
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="0.25"
-            android:src="@drawable/home_icon"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_home"
             />
+        <View
+            android:layout_height="35dp"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.01"
+            android:background="@android:color/black"
 
+            />
         <ImageView
             android:id="@+id/ivFav"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="0.25"
-            android:src="@drawable/fav"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_favorite"
             />
+
+
+
+        <View
+            android:layout_height="35dp"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.01"
+            android:background="@android:color/black"
+
+            />
+
         <ImageView
             android:id="@+id/ivCart"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="0.25"
-            android:src="@drawable/cart"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_shoppingcart"
+            />
+        <View
+            android:layout_height="35dp"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.01"
+            android:background="@android:color/black"
+
             />
         <ImageView
             android:id="@+id/ivNotifications"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="0.25"
-            android:src="@drawable/notification"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_notifications"
+            />
+        <View
+            android:layout_height="35dp"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.01"
+            android:background="@android:color/black"
+
             />
         <ImageView
             android:id="@+id/ivProfile"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
+            android:layout_gravity="center"
             android:layout_weight="0.25"
-            android:src="@drawable/user"
+            android:src="@drawable/ic_about_us"
             />
 
 

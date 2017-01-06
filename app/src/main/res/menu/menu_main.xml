@@ -7,18 +7,14 @@
         android:id="@+id/action_search"
         android:title="@string/action_search"
         android:orderInCategory="100"
-        android:icon="@android:drawable/btn_star"
+        android:icon="@mipmap/ic_location"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_searchOne"
+        android:id="@+id/action_filter"
         android:title="@string/action_search"
         android:orderInCategory="100"
-        android:icon="@android:drawable/btn_star"
+        android:icon="@mipmap/filter"
         app:showAsAction="always" />
 
-    <item
-        android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
+
 </menu>

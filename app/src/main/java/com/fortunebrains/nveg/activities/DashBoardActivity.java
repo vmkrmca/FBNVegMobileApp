@@ -126,9 +126,6 @@ public class DashBoardActivity extends FragmentActivity implements View.OnClickL
         tvSignIn.setOnClickListener(this);
         tvSignUp.setOnClickListener(this);
         tvSkip.setOnClickListener(this);
-
-
-
         _mViewPager = (ViewPager)findViewById(R.id.imageviewPager);
         _adapter = new ImageViewPagerAdapter(DashBoardActivity.this, getSupportFragmentManager());
         _mViewPager.setAdapter(_adapter);
@@ -137,7 +134,8 @@ public class DashBoardActivity extends FragmentActivity implements View.OnClickL
 
     }
 
-    public boolean isLoggedIn() {
+    public boolean isLoggedIn()
+    {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         return accessToken != null;
     }

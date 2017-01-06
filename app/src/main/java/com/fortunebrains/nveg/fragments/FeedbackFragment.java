@@ -40,8 +40,7 @@ public class FeedbackFragment extends android.support.v4.app.Fragment implements
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.action_search).setVisible(false);
-        menu.findItem(R.id.action_searchOne).setVisible(false);
-        menu.findItem(R.id.action_settings).setVisible(false);
+        menu.findItem(R.id.action_filter).setVisible(false);
         super.onPrepareOptionsMenu(menu);
     }
 

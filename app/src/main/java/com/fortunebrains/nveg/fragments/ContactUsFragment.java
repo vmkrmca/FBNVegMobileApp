@@ -2,6 +2,7 @@ package com.fortunebrains.nveg.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -47,8 +48,7 @@ public class ContactUsFragment extends android.support.v4.app.Fragment implement
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.action_search).setVisible(false);
-        menu.findItem(R.id.action_searchOne).setVisible(false);
-        menu.findItem(R.id.action_settings).setVisible(false);
+        menu.findItem(R.id.action_filter).setVisible(false);
         super.onPrepareOptionsMenu(menu);
     }
 
@@ -61,16 +61,19 @@ public class ContactUsFragment extends android.support.v4.app.Fragment implement
         String message = etMessage.getText().toString();
         String name = etName.getText().toString();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,"", new Response.Listener<String>()
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,"http://api.androidhive.info/contacts/", new Response.Listener<String>()
         {
             @Override
-            public void onResponse(String response) {
-
+            public void onResponse(String response)
+            {
+                Log.i("Response ::",response);
             }
-        }, new Response.ErrorListener() {
+        }, new Response.ErrorListener()
+        {
             @Override
-            public void onErrorResponse(VolleyError error) {
-
+            public void onErrorResponse(VolleyError error)
+            {
+                Log.i("Response Error ::",""+error);
             }
         });
 

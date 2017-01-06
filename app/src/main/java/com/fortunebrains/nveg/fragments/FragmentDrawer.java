@@ -107,7 +107,8 @@ public class FragmentDrawer extends Fragment {
         data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "Logout"));
         recyclerView.setAdapter(new ExpandableListAdapter(data));
 
-       recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
+       recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener()
+       {
             @Override
             public void onClick(View view, int position)
             {
@@ -115,13 +116,12 @@ public class FragmentDrawer extends Fragment {
                 Toast.makeText(getActivity(),""+position,Toast.LENGTH_SHORT).show();
                 mDrawerLayout.closeDrawer(containerView);
             }
-
             @Override
-            public void onLongClick(View view, int position) {
+            public void onLongClick(View view, int position)
+            {
 
             }
         }));
-
         return layout;
     }
 

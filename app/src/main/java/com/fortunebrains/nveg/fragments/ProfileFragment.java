@@ -1,6 +1,6 @@
 package com.fortunebrains.nveg.fragments;
 
-import android.app.ActionBar;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +14,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fortunebrains.nveg.R;
+import com.fortunebrains.nveg.activities.AddAdreessActivity;
+import com.fortunebrains.nveg.activities.AdreessBookActivity;
+import com.fortunebrains.nveg.activities.CancelActivity;
+import com.fortunebrains.nveg.activities.ChangePasswordActivity;
+import com.fortunebrains.nveg.activities.EditProfileActivity;
+import com.fortunebrains.nveg.activities.MyOrdersActivity;
+import com.fortunebrains.nveg.activities.ViewProfileActivity;
 import com.fortunebrains.nveg.common.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -25,7 +32,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
     SharedPreferences sharedPreferences;
     android.app.ActionBar actionBar;
     RoundedImageView rvProfilePic;
-    TextView tvVegID,tvGCustomer,tvMyOrders,tvCancelOrders,tvWallet,tvEditProfile,tvChangePassword,tvViewProfile,tvAddAddress;
+    TextView tvVegID,tvGCustomer,tvMyOrders,tvCancelOrders,tvWallet,tvEditProfile,tvChangePassword,tvViewProfile,tvAddAddress,tvAddressBook;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,6 +49,8 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
         tvVegID = (TextView) view.findViewById(R.id.tvVegID);
         tvViewProfile = (TextView) view.findViewById(R.id.tvViewProfile);
         tvAddAddress = (TextView) view.findViewById(R.id.tvAddAddress);
+        tvAddressBook = (TextView) view.findViewById(R.id.tvAddressBook);
+
 
         sharedPreferences = getActivity().getSharedPreferences("prefName",getActivity().MODE_APPEND);
 
@@ -53,6 +62,8 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
         tvChangePassword.setOnClickListener(this);
         tvViewProfile.setOnClickListener(this);
         tvAddAddress.setOnClickListener(this);
+        tvAddressBook.setOnClickListener(this);
+
         String uri = sharedPreferences.getString("URI",null);
         String name = sharedPreferences.getString("NAME",null);
         int key = sharedPreferences.getInt("KEY",0);
@@ -68,8 +79,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.action_search).setVisible(false);
-        menu.findItem(R.id.action_searchOne).setVisible(false);
-        menu.findItem(R.id.action_settings).setVisible(false);
+        menu.findItem(R.id.action_filter).setVisible(false);
         super.onPrepareOptionsMenu(menu);
     }
 
@@ -83,36 +93,30 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
         {
             case R.id.tvGCustomer:
                 fragment = new CustomerFragment();
-                title ="Genuine Customers";
                 break;
             case R.id.tvMyOrders:
-                fragment = new MyOrdersFragment();
-                title ="My Orders";
+                startActivity(new Intent(getActivity(),MyOrdersActivity.class));
                 break;
             case R.id.tvCancelOrders:
-                fragment = new CancelOrdersFragment();
-                title ="Cancel Orders";
+                startActivity(new Intent(getActivity(),CancelActivity.class));
                 break;
             case R.id.tvWallet:
                 fragment = new WalletFragment();
-                title ="MyWallet";
                 break;
             case R.id.tvEditProfile:
-                fragment = new EditProfileFragment();
-                title ="EditProfile";
+                startActivity(new Intent(getActivity(),EditProfileActivity.class));
                 break;
             case R.id.tvChangePassword:
-                fragment = new ChangePasswordFragment();
-                title ="ChangePassword";
+                startActivity(new Intent(getActivity(),ChangePasswordActivity.class));
                 break;
             case R.id.tvViewProfile:
-                fragment = new ViewProfileFragment();
-                title ="ChangePassword";
+                startActivity(new Intent(getActivity(),ViewProfileActivity.class));
                 break;
-
             case R.id.tvAddAddress:
-                fragment = new AddAddressFragment();
-                title ="ChangePassword";
+                startActivity(new Intent(getActivity(),AddAdreessActivity.class));
+                break;
+            case R.id.tvAddressBook:
+                startActivity(new Intent(getActivity(),AdreessBookActivity.class));
                 break;
 
         }

@@ -1,15 +1,17 @@
 package com.fortunebrains.nveg.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
 
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.fortunebrains.nveg.R;
 
-public class SplashScreenActivity extends AppCompatActivity {
+public class SplashScreenActivity extends Activity {
 
     private static final long SPLASH_TIME_OUT = 2000;
 
@@ -17,6 +19,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_splash_screen);
 
         new Handler().postDelayed(new Runnable()

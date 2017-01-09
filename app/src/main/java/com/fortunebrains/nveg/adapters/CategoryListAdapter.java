@@ -1,6 +1,7 @@
 package com.fortunebrains.nveg.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.fortunebrains.nveg.R;
+import com.fortunebrains.nveg.activities.DetailedCategoryActivity;
 import com.fortunebrains.nveg.common.CategoryData;
 import com.fortunebrains.nveg.common.MyCancelOrders;
 
@@ -22,12 +24,14 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     Context mContext;
     int num;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder
+    {
         public TextView tvCategoryName, tvCategoryLocation, tvCategoryType,tvAmount,tvItemLocation;
         ImageView ivCategoryImage, ivFav, ivCart, ivRate;
         ElegantNumberButton button;
 
-        public MyViewHolder(View view) {
+        public MyViewHolder(View view)
+        {
             super(view);
             tvCategoryName = (TextView) view.findViewById(R.id.tvItemName);
             tvCategoryLocation = (TextView) view.findViewById(R.id.tvItemLocation);
@@ -39,6 +43,9 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             ivFav = (ImageView) view.findViewById(R.id.ivFav);
             ivCart = (ImageView) view.findViewById(R.id.ivCart);
             ivRate = (ImageView) view.findViewById(R.id.ivRating);
+
+
+
         }
     }
 
@@ -59,7 +66,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         CategoryData categoryData = categoryDataList.get(position);
         holder.tvCategoryName.setText(categoryData.getCategoryName());
         holder.tvCategoryLocation.setText(categoryData.getLocation());
@@ -75,12 +82,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             @Override
             public void onClick(View view)
             {
-                /*String amt = holder.tvAmount.getText().toString();
-                String number = holder.button.getNumber();
-                num = Integer.parseInt(number);
-                int Bal = Integer.parseInt(amt);
-                int aBal = num * Bal;
-                holder.tvAmount.setText(""+aBal);*/
+
             }
         });
 
@@ -90,6 +92,19 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
                 Log.i("Data", ""+oldValue+""+newValue);
             }
         });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(mContext,DetailedCategoryActivity.class);
+                i.putExtra("Location",categoryDataList.get(position).getLocation());
+                mContext.startActivity(i);
+            }
+        });
+
+
+
     }
 
     @Override

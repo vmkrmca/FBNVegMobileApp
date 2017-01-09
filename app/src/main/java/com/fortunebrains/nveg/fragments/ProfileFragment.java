@@ -88,7 +88,6 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
     {
 
         Fragment fragment = null;
-        String title ="";
         switch (v.getId())
         {
             case R.id.tvGCustomer:

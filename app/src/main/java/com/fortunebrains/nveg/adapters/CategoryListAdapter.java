@@ -22,7 +22,8 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
     private List<CategoryData> categoryDataList;
     Context mContext;
-    int num;
+
+    public static int num = 0;
 
     public class MyViewHolder extends RecyclerView.ViewHolder
     {
@@ -78,10 +79,17 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         holder.ivRate.setImageResource(R.mipmap.ic_starrate);
         holder.ivFav.setImageResource(R.mipmap.ic_favorite);
         holder.ivCart.setImageResource(R.mipmap.ic_shoppingcart);
-        holder.button.setOnClickListener(new ElegantNumberButton.OnClickListener() {
+        holder.button.setOnClickListener(new ElegantNumberButton.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
+                String number = holder.button.getNumber();
+               /* Log.i("Number ::",number);
+                int Num = Integer.parseInt(number);
+                num = Integer.parseInt(holder.tvAmount.getText().toString());
+                Log.i("Number",""+num);*/
+
 
             }
         });
@@ -89,7 +97,24 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         holder.button.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
             @Override
             public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
-                Log.i("Data", ""+oldValue+""+newValue);
+
+
+               String amount = categoryDataList.get(position).getCategoryAmt();
+               num = Integer.parseInt(amount);
+
+                if (newValue==0)
+                {
+                    int balAmount = newValue * num;
+                    holder.tvAmount.setText(""+num);
+                    Log.i("Num Amount",""+amount);
+                }
+                else
+                {
+                    int balAmount = newValue * num;
+                    holder.tvAmount.setText(""+balAmount);
+                    Log.i("Num Amount",""+amount);
+                }
+
             }
         });
 

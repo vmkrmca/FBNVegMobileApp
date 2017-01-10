@@ -55,6 +55,8 @@ public class ShoppingActivity extends AppCompatActivity implements FragmentDrawe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+
         setContentView(R.layout.activity_shopping_screen);
         sharedPreferences = getSharedPreferences("prefName", MODE_APPEND);
         rvProfilePic = (RoundedImageView) findViewById(R.id.rvProfilePic);

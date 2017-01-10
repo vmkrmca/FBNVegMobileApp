@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background">
 
 
     <com.fortunebrains.nveg.common.RoundedImageView
@@ -22,8 +23,9 @@
         android:layout_marginTop="5dp"
         android:padding="5dp"
         android:gravity="center"
+
         android:text="NVegID:      AQR123456"
-        android:textColor="#000"
+        android:textColor="#FFF"
         android:textSize="18sp" />
 
     <TextView
@@ -36,7 +38,7 @@
         android:padding="5dp"
         android:gravity="center"
         android:text="Become a Genunie Customer"
-        android:textColor="#000"
+        android:textColor="#FFF"
         android:textSize="18sp" />
 
     <LinearLayout
@@ -58,7 +60,7 @@
             android:padding="5dp"
 
             android:text="MyOrders"
-            android:textColor="#000"
+            android:textColor="#FFF"
             android:textSize="18sp" />
 
         <TextView
@@ -71,7 +73,7 @@
             android:layout_marginTop="5dp"
             android:padding="5dp"
             android:text="CancelOrders"
-            android:textColor="#000"
+            android:textColor="#FFF"
             android:textSize="18sp" />
         </LinearLayout>
 
@@ -93,7 +95,7 @@
         android:layout_marginTop="5dp"
         android:padding="5dp"
         android:text="My Wallet"
-        android:textColor="#000"
+        android:textColor="#FFF"
         android:textSize="18sp" />
 
         <TextView
@@ -106,7 +108,7 @@
             android:layout_marginTop="5dp"
             android:padding="5dp"
             android:text="Ch Password"
-            android:textColor="#000"
+            android:textColor="#FFF"
             android:textSize="18sp" />
 
 
@@ -131,7 +133,7 @@
         android:layout_marginTop="5dp"
         android:padding="5dp"
         android:text="ViewProfile"
-        android:textColor="#000"
+        android:textColor="#FFF"
         android:textSize="18sp" />
 
         <TextView
@@ -144,7 +146,7 @@
             android:layout_marginTop="5dp"
             android:padding="5dp"
             android:text="EditProfile"
-            android:textColor="#000"
+            android:textColor="#FFF"
             android:textSize="18sp" />
 </LinearLayout>
 
@@ -166,7 +168,7 @@
             android:layout_marginTop="5dp"
             android:padding="5dp"
             android:text="Address Book"
-            android:textColor="#000"
+            android:textColor="#FFF"
             android:textSize="18sp" />
     <TextView
         android:id="@+id/tvAddAddress"
@@ -178,24 +180,12 @@
         android:layout_marginTop="5dp"
         android:padding="5dp"
         android:text="Add Address"
-        android:textColor="#000"
+        android:textColor="#FFF"
         android:textSize="18sp" />
 
 
 </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvLogout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="15dp"
-        android:padding="5dp"
-        android:text="Logout"
-        android:gravity="center"
-        android:textColor="#000"
-        android:textSize="18sp" />
 
 
 </LinearLayout>

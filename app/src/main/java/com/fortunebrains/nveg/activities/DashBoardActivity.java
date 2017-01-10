@@ -52,6 +52,8 @@ public class DashBoardActivity extends FragmentActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+
         setContentView(R.layout.activity_dashboard_screen);
 
         intialViewControls();
@@ -164,7 +166,7 @@ public class DashBoardActivity extends FragmentActivity implements View.OnClickL
                 startActivity(new Intent(getApplicationContext(),SignUpActivity.class));
                 break;
             case R.id.tvSkip:
-                startActivity(new Intent(getApplicationContext(),EnableLocationActivity.class));
+                startActivity(new Intent(getApplicationContext(),ShoppingActivity.class));
                 break;
         }
     }

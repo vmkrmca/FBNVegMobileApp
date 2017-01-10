@@ -3,25 +3,37 @@ package com.fortunebrains.nveg.fragments;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.fortunebrains.nveg.R;
 import com.fortunebrains.nveg.activities.AddAdreessActivity;
 import com.fortunebrains.nveg.activities.AdreessBookActivity;
 import com.fortunebrains.nveg.activities.CancelActivity;
 import com.fortunebrains.nveg.activities.ChangePasswordActivity;
+import com.fortunebrains.nveg.activities.DashBoardActivity;
 import com.fortunebrains.nveg.activities.EditProfileActivity;
 import com.fortunebrains.nveg.activities.MyOrdersActivity;
+import com.fortunebrains.nveg.activities.ShoppingActivity;
 import com.fortunebrains.nveg.activities.ViewProfileActivity;
 import com.fortunebrains.nveg.common.RoundedImageView;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -31,6 +43,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
 
     SharedPreferences sharedPreferences;
     android.app.ActionBar actionBar;
+    int key;
     RoundedImageView rvProfilePic;
     TextView tvVegID,tvGCustomer,tvMyOrders,tvCancelOrders,tvWallet,tvEditProfile,tvChangePassword,tvViewProfile,tvAddAddress,tvAddressBook;
     @Nullable
@@ -52,6 +65,10 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
         tvAddressBook = (TextView) view.findViewById(R.id.tvAddressBook);
 
 
+
+
+
+
         sharedPreferences = getActivity().getSharedPreferences("prefName",getActivity().MODE_APPEND);
 
         tvGCustomer.setOnClickListener(this);
@@ -63,10 +80,12 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
         tvViewProfile.setOnClickListener(this);
         tvAddAddress.setOnClickListener(this);
         tvAddressBook.setOnClickListener(this);
-
         String uri = sharedPreferences.getString("URI",null);
         String name = sharedPreferences.getString("NAME",null);
-        int key = sharedPreferences.getInt("KEY",0);
+        key = sharedPreferences.getInt("KEY",0);
+
+        Log.i("KEY ",""+key);
+
         setHasOptionsMenu(true);
         Picasso.with(getActivity()).load(uri).into(rvProfilePic);
 
@@ -126,6 +145,17 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
             fragmentTransaction.replace(R.id.container_body, fragment);
             fragmentTransaction.commit();
         }
+
+    }
+
+
+
+    private void fbLogout()
+    {
+        FacebookSdk.sdkInitialize(getActivity());
+        LoginManager.getInstance().logOut();
+        startActivity(new Intent(getActivity(), DashBoardActivity.class));
+        getActivity().finish();
 
     }
 

@@ -231,7 +231,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:rating="5" />
+                            android:rating="5"
+                            android:layout_marginRight="20dp"
+
+                            />
                         </LinearLayout>
 
 
@@ -243,6 +246,8 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginRight="25dp"
                         android:lines="4"
+                        android:gravity="start"
+                        android:paddingLeft="10dp"
                         android:background="@drawable/review_border"
                         android:inputType="textMultiLine" />
 
@@ -269,6 +274,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.1"
+
             android:orientation="vertical">
 
 

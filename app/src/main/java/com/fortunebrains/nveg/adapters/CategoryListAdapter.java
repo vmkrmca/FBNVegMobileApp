@@ -104,15 +104,12 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
                 if (newValue==0)
                 {
-                    int balAmount = newValue * num;
                     holder.tvAmount.setText(""+num);
-                    Log.i("Num Amount",""+amount);
                 }
                 else
                 {
                     int balAmount = newValue * num;
                     holder.tvAmount.setText(""+balAmount);
-                    Log.i("Num Amount",""+amount);
                 }
 
             }

@@ -223,10 +223,17 @@ public class ShoppingActivity extends AppCompatActivity implements FragmentDrawe
     {
         int id = item.getItemId();
 
-        if (id == R.id.action_filter)
+        switch (item.getItemId())
         {
-            startActivity(new Intent(getApplicationContext(),FilterActivity.class));
-            return true;
+            case R.id.action_filter:
+                startActivity(new Intent(getApplicationContext(),FilterActivity.class));
+
+                break;
+            case R.id.action_map:
+                startActivity(new Intent(getApplicationContext(),SelectLocationActivity.class));
+
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

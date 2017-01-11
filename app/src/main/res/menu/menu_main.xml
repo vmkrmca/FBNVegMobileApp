@@ -4,7 +4,7 @@
     tools:context=".MainActivity">
 
     <item
-        android:id="@+id/action_search"
+        android:id="@+id/action_map"
         android:title="@string/action_search"
         android:orderInCategory="100"
         android:icon="@mipmap/ic_location"

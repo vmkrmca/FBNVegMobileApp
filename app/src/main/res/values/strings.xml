@@ -11,7 +11,7 @@
     <string name="action_search">Search</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-
+    <string name="str_atv_places">Enter Place Here</string>
     <string name="nav_item_home">Home</string>
     <string name="nav_item_order">Order By Categories</string>
     <string name="nav_item_hotdeals">Hot Deals</string>

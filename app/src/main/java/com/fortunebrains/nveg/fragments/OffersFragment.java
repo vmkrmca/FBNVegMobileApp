@@ -27,7 +27,7 @@ public class OffersFragment extends android.support.v4.app.Fragment
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.action_search).setVisible(false);
+        menu.findItem(R.id.action_map).setVisible(false);
         menu.findItem(R.id.action_filter).setVisible(false);
         super.onPrepareOptionsMenu(menu);
     }

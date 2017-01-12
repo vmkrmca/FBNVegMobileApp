@@ -209,61 +209,53 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
+
+
                     <LinearLayout
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
-                        android:orientation="horizontal">
-
-
-                        <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="0dp"
-                            android:layout_weight="0.6"
-                            android:text="Write Review"
-                            android:textStyle="bold"
-                            android:layout_gravity="center"
-                            android:textColor="#FFF"
-                            android:layout_marginLeft="25dp"
-                            android:padding="8dp" />
-
-                        <RatingBar
-                            android:id="@+id/rbRating"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:rating="5"
-                            android:layout_marginRight="20dp"
-
-                            />
-                        </LinearLayout>
-
-
-                    <EditText
-                        android:id="@+id/etReview"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
                         android:layout_marginLeft="25dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="25dp"
-                        android:lines="4"
-                        android:gravity="start"
-                        android:paddingLeft="10dp"
-                        android:background="@drawable/review_border"
-                        android:inputType="textMultiLine" />
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="25dp">
 
                         <TextView
-                            android:id="@+id/tvViewRev"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tvWriteReview"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
                             android:layout_height="wrap_content"
                             android:background="@android:color/holo_green_dark"
-                            android:gravity="right"
+                            android:gravity="center"
                             android:padding="12dp"
                             android:layout_gravity="right"
-                            android:text="Open Review"
-                            android:layout_marginRight="25dp"
+                            android:text="Write Review"
                             android:layout_marginTop="5dp"
                             android:textColor="#FFF"
                             android:textStyle="bold" />
+
+                        <View
+                            android:layout_height="1dp"
+                            android:layout_weight="0.01"
+                            android:layout_width="0dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvViewRev"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/holo_green_dark"
+                            android:gravity="center"
+                            android:padding="12dp"
+                            android:layout_gravity="right"
+                            android:text="View Review"
+                            android:layout_marginTop="5dp"
+                            android:textColor="#FFF"
+                            android:textStyle="bold" />
+
+                        </LinearLayout>
+
+
 
                 </LinearLayout>
 
@@ -274,7 +266,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.1"
-
             android:orientation="vertical">
 
 
@@ -287,6 +278,7 @@
                 android:text="CHECK OUT"
                 android:textColor="#FFF"
                 android:textStyle="bold"
+
 
 
                 />

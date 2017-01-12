@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="0.9"
+        android:orientation="horizontal">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+
+            android:id="@+id/rvCartDetails"/>
+
+
+        <TextView
+            android:id="@+id/tvData"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Data No Found in Cart"
+            android:layout_gravity="center|center_vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:textSize="25sp"
+
+            android:background="@drawable/background"
+
+            />
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="0.1"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvCheckOut"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:text="CHECK OUT"
+            android:background="@android:color/holo_red_dark"
+            android:textColor="#FFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"
+
+            />
+    </LinearLayout>
+
+
+
+</LinearLayout>

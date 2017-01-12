@@ -1,39 +1,36 @@
 package com.fortunebrains.nveg.activities;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.fortunebrains.nveg.R;
-import com.fortunebrains.nveg.adapters.ImageViewPagerAdapter;
+import com.fortunebrains.nveg.adapters.CartDetailsAdapter;
+import com.fortunebrains.nveg.common.CartDetails;
+import com.fortunebrains.nveg.database.DBHelper;
 import com.payu.india.CallBackHandler.OnetapCallback;
 import com.payu.india.Extras.PayUChecksum;
 import com.payu.india.Interfaces.OneClickPaymentListener;
 import com.payu.india.Model.PaymentParams;
 import com.payu.india.Model.PayuConfig;
 import com.payu.india.Model.PayuHashes;
-import com.payu.india.Model.PostData;
 import com.payu.india.Payu.Payu;
 import com.payu.india.Payu.PayuConstants;
-import com.payu.india.Payu.PayuErrors;
 import com.payu.payuui.Activity.PayUBaseActivity;
 
 import org.json.JSONArray;
@@ -47,101 +44,100 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * Created by sree on 1/6/2017.
+ * Created by sree on 1/11/2017.
  */
-public class DetailedCategoryActivity extends AppCompatActivity implements View.OnClickListener, OneClickPaymentListener {
-    private static final int REQUEST_CALL = 1;
-    ViewPager viewPager;
-    String Location;
-    TextView tvCheckOut,tvWriteReview;
-    ImageView ivLeftNav,ivRightNav,ivCall,ivFav,ivShare,ivRating,ivCart,ivLocation;
-    private ImageViewPagerAdapter _adapter;
+public class CartActivity extends AppCompatActivity implements View.OnClickListener,OneClickPaymentListener {
 
-
+    ImageView ivBack;
+    TextView tvCheckOut,tvData;
     private String merchantKey, userCredentials;
-
     // These will hold all the payment parameters
     private PaymentParams mPaymentParams;
-
     // This sets the configuration
     private PayuConfig payuConfig;
-
     private Spinner environmentSpinner;
-
     // Used when generating hash from SDK
     private PayUChecksum checksum;
+    RecyclerView rvCartDetails;
+    ArrayList<CartDetails> cartDetailsArrayList;
+
+    DBHelper dbHelper = null;
+    SQLiteDatabase db;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailed_category);
+        setContentView(R.layout.activity_cart_details);
 
+        dbHelper = new DBHelper(getApplicationContext());
+        cartDetailsArrayList = new ArrayList<CartDetails>();
+        rvCartDetails = (RecyclerView) findViewById(R.id.rvCartDetails);
         payuMoneyCode();
-        Location = getIntent().getExtras().getString("Location","");
-        tvCheckOut = (TextView) findViewById(R.id.tvCheckOut);
-        tvCheckOut.setOnClickListener(this);
-
         android.support.v7.app.ActionBar mActionBar = getSupportActionBar();
         mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.setDisplayShowTitleEnabled(false);
         LayoutInflater mInflater = LayoutInflater.from(this);
 
         View mCustomView = mInflater.inflate(R.layout.custom_action_bar, null);
-        ImageView ivBack = (ImageView) mCustomView.findViewById(R.id.ivBack);
+
+        hideKeyBoard(mCustomView);
+         ivBack = (ImageView) mCustomView.findViewById(R.id.ivBack);
         TextView tvTitle = (TextView) mCustomView.findViewById(R.id.tvTitle);
-        tvTitle.setText("  Categoery ");
+        tvTitle.setText("Cart Details");
+        tvCheckOut = (TextView) findViewById(R.id.tvCheckOut);
+        tvData = (TextView) findViewById(R.id.tvData);
+        tvCheckOut.setOnClickListener(this);
         ivBack.setOnClickListener(this);
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        ivLeftNav = (ImageView) findViewById(R.id.left_nav);
+        getDataFromDB();
 
-        ivCall = (ImageView) findViewById(R.id.ivCall);
-        ivCart = (ImageView) findViewById(R.id.ivCart);
-        ivShare = (ImageView) findViewById(R.id.ivShare);
-        ivRating = (ImageView) findViewById(R.id.ivRating);
-        ivLocation = (ImageView) findViewById(R.id.ivLocation);
-        ivFav = (ImageView) findViewById(R.id.ivFav);
-        tvWriteReview = (TextView) findViewById(R.id.tvWriteReview);
 
-        ivRightNav = (ImageView) findViewById(R.id.right_nav);
-        _adapter = new ImageViewPagerAdapter(DetailedCategoryActivity.this, getSupportFragmentManager());
-        viewPager.setAdapter(_adapter);
-        ivLeftNav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int tab = viewPager.getCurrentItem();
-                if (tab > 0) {
-                    tab--;
-                    viewPager.setCurrentItem(tab);
-                } else if (tab == 0) {
-                    viewPager.setCurrentItem(tab);
-                }
+        if (cartDetailsArrayList.size()!=0)
+        {
+            CartDetailsAdapter cartDetailsAdapter = new CartDetailsAdapter(CartActivity.this,cartDetailsArrayList);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+            rvCartDetails.setLayoutManager(mLayoutManager);
+            rvCartDetails.setItemAnimator(new DefaultItemAnimator());
+            rvCartDetails.setAdapter(cartDetailsAdapter);
+        }
+        else
+        {
+            rvCartDetails.setVisibility(View.GONE);
+            tvData.setVisibility(View.VISIBLE);
+            tvCheckOut.setVisibility(View.GONE);
+        }
+
+    }
+
+    private void getDataFromDB()
+    {
+       db  =dbHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("select * from addCartTbl",null);
+        if (cursor!=null)
+        {
+            if (cursor.moveToFirst())
+            {
+                do
+                {
+                    CartDetails cartDetails = new CartDetails();
+                    cartDetails.setItemCost(cursor.getString(cursor.getColumnIndex("itemCost")));
+                    cartDetails.setItemName(cursor.getString(cursor.getColumnIndex("itemName")));
+                    cartDetails.setPos(cursor.getString(cursor.getColumnIndex("itemPos")));
+                    cartDetails.setItemCount(cursor.getString(cursor.getColumnIndex("itemCount")));
+                    cartDetailsArrayList.add(cartDetails);
+
+                }while (cursor.moveToNext());
             }
-        });
+        }
 
-        // Images right navigatin
-        ivRightNav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int tab = viewPager.getCurrentItem();
-                tab++;
-                viewPager.setCurrentItem(tab);
-            }
-        });
-
-        ivCall.setOnClickListener(this);
-        ivCart.setOnClickListener(this);
-        ivFav.setOnClickListener(this);
-        ivShare.setOnClickListener(this);
-        ivLocation.setOnClickListener(this);
-        ivRating.setOnClickListener(this);
-        tvWriteReview.setOnClickListener(this);
 
     }
 
@@ -152,49 +148,28 @@ public class DetailedCategoryActivity extends AppCompatActivity implements View.
         //TODO Must write below code in your activity to set up initial context for PayU
         Payu.setInstance(this);
     }
+    private void hideKeyBoard(View mCustomView) {
+        if (mCustomView != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(mCustomView.getWindowToken(), 0);
+        }
+    }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
+
         switch (v.getId())
         {
             case R.id.ivBack:
                 finish();
                 break;
-            case R.id.ivCall:
-                callIntent();
-                break;
-            case R.id.ivCart:
-                Intent cartActivity = new Intent(DetailedCategoryActivity.this,CartActivity.class);
-                startActivity(cartActivity);
-                break;
-            case R.id.ivFav:
-                break;
-            case R.id.ivLocation:
-
-                Intent i = new Intent(getApplicationContext(),LocationActivity.class);
-                i.putExtra("Location",Location);
-                startActivity(i);
-                break;
-            case R.id.ivRating:
-                Intent i1 = new Intent(getApplicationContext(),RatingActivity.class);
-                startActivity(i1);
-                break;
-            case R.id.ivShare:
-                shareIntent();
-                break;
             case R.id.tvCheckOut:
-
                 paymentMode();
                 break;
-            case R.id.tvWriteReview:
-                Intent i2 = new Intent(getApplicationContext(),RatingActivity.class);
-                startActivity(i2);
-                break;
-
 
         }
     }
+
 
     private void paymentMode()
     {
@@ -276,140 +251,6 @@ public class DetailedCategoryActivity extends AppCompatActivity implements View.
 
     }
 
-    private void shareIntent() {
-        String shareBody = "Here is the share content body";
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-        startActivity(Intent.createChooser(sharingIntent, "Sharing"));
-    }
-
-    private void callIntent() {
-        new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("CALL")
-                .setMessage("Do You want to Call to this Number")
-                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        callingIntent();
-                    }
-                })
-                .setNegativeButton("NO", null)
-                .show();
-    }
-
-    private void callingIntent()
-    {
-
-        Intent callAct = new Intent(Intent.ACTION_CALL, Uri.parse("tel:9966654254"));
-        if (ContextCompat.checkSelfPermission(DetailedCategoryActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(DetailedCategoryActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
-        } else {
-            startActivity(callAct);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode){
-            case R.id.ivCall:
-                break;
-        }
-        if (grantResults.length > 0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
-        }
-        else {
-        }
-    }
-
-
-
-    /*PayU Money Code Functioaanlity*/
-
-
-    public void generateHashFromSDK(PaymentParams mPaymentParams, String salt) {
-        PayuHashes payuHashes = new PayuHashes();
-        PostData postData = new PostData();
-
-        // payment Hash;
-        checksum = null;
-        checksum = new PayUChecksum();
-        checksum.setAmount(mPaymentParams.getAmount());
-        checksum.setKey(mPaymentParams.getKey());
-        checksum.setTxnid(mPaymentParams.getTxnId());
-        checksum.setEmail(mPaymentParams.getEmail());
-        checksum.setSalt(salt);
-        checksum.setProductinfo(mPaymentParams.getProductInfo());
-        checksum.setFirstname(mPaymentParams.getFirstName());
-        checksum.setUdf1(mPaymentParams.getUdf1());
-        checksum.setUdf2(mPaymentParams.getUdf2());
-        checksum.setUdf3(mPaymentParams.getUdf3());
-        checksum.setUdf4(mPaymentParams.getUdf4());
-        checksum.setUdf5(mPaymentParams.getUdf5());
-
-        postData = checksum.getHash();
-        if (postData.getCode() == PayuErrors.NO_ERROR) {
-            payuHashes.setPaymentHash(postData.getResult());
-        }
-
-        // checksum for payemnt related details
-        // var1 should be either user credentials or default
-        String var1 = mPaymentParams.getUserCredentials() == null ? PayuConstants.DEFAULT : mPaymentParams.getUserCredentials();
-        String key = mPaymentParams.getKey();
-
-        if ((postData = calculateHash(key, PayuConstants.PAYMENT_RELATED_DETAILS_FOR_MOBILE_SDK, var1, salt)) != null && postData.getCode() == PayuErrors.NO_ERROR) // Assign post data first then check for success
-            payuHashes.setPaymentRelatedDetailsForMobileSdkHash(postData.getResult());
-        //vas
-        if ((postData = calculateHash(key, PayuConstants.VAS_FOR_MOBILE_SDK, PayuConstants.DEFAULT, salt)) != null && postData.getCode() == PayuErrors.NO_ERROR)
-            payuHashes.setVasForMobileSdkHash(postData.getResult());
-
-        // getIbibocodes
-        if ((postData = calculateHash(key, PayuConstants.GET_MERCHANT_IBIBO_CODES, PayuConstants.DEFAULT, salt)) != null && postData.getCode() == PayuErrors.NO_ERROR)
-            payuHashes.setMerchantIbiboCodesHash(postData.getResult());
-
-        if (!var1.contentEquals(PayuConstants.DEFAULT)) {
-            // get user card
-            if ((postData = calculateHash(key, PayuConstants.GET_USER_CARDS, var1, salt)) != null && postData.getCode() == PayuErrors.NO_ERROR) // todo rename storedc ard
-                payuHashes.setStoredCardsHash(postData.getResult());
-            // save user card
-            if ((postData = calculateHash(key, PayuConstants.SAVE_USER_CARD, var1, salt)) != null && postData.getCode() == PayuErrors.NO_ERROR)
-                payuHashes.setSaveCardHash(postData.getResult());
-            // delete user card
-            if ((postData = calculateHash(key, PayuConstants.DELETE_USER_CARD, var1, salt)) != null && postData.getCode() == PayuErrors.NO_ERROR)
-                payuHashes.setDeleteCardHash(postData.getResult());
-            // edit user card
-            if ((postData = calculateHash(key, PayuConstants.EDIT_USER_CARD, var1, salt)) != null && postData.getCode() == PayuErrors.NO_ERROR)
-                payuHashes.setEditCardHash(postData.getResult());
-        }
-
-        if (mPaymentParams.getOfferKey() != null) {
-            postData = calculateHash(key, PayuConstants.OFFER_KEY, mPaymentParams.getOfferKey(), salt);
-            if (postData.getCode() == PayuErrors.NO_ERROR) {
-                payuHashes.setCheckOfferStatusHash(postData.getResult());
-            }
-        }
-
-        if (mPaymentParams.getOfferKey() != null && (postData = calculateHash(key, PayuConstants.CHECK_OFFER_STATUS, mPaymentParams.getOfferKey(), salt)) != null && postData.getCode() == PayuErrors.NO_ERROR) {
-            payuHashes.setCheckOfferStatusHash(postData.getResult());
-        }
-
-        // we have generated all the hases now lest launch sdk's ui
-        launchSdkUI(payuHashes);
-    }
-
-    // deprecated, should be used only for testing.
-    private PostData calculateHash(String key, String command, String var1, String salt) {
-        checksum = null;
-        checksum = new PayUChecksum();
-        checksum.setKey(key);
-        checksum.setCommand(command);
-        checksum.setVar1(var1);
-        checksum.setSalt(salt);
-        return checksum.getHash();
-    }
 
     /**
      * This method generates hash from server.
@@ -441,7 +282,7 @@ public class DetailedCategoryActivity extends AppCompatActivity implements View.
         String postParams = postParamsBuffer.charAt(postParamsBuffer.length() - 1) == '&' ? postParamsBuffer.substring(0, postParamsBuffer.length() - 1).toString() : postParamsBuffer.toString();
 
         // lets make an api call
-        GetHashesFromServerTask getHashesFromServerTask = new GetHashesFromServerTask();
+        CartActivity.GetHashesFromServerTask getHashesFromServerTask = new CartActivity.GetHashesFromServerTask();
         getHashesFromServerTask.execute(postParams);
     }
 
@@ -459,7 +300,7 @@ public class DetailedCategoryActivity extends AppCompatActivity implements View.
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new ProgressDialog(DetailedCategoryActivity.this);
+            progressDialog = new ProgressDialog(CartActivity.this);
             progressDialog.setMessage("Please wait...");
             progressDialog.show();
         }
@@ -779,8 +620,7 @@ public class DetailedCategoryActivity extends AppCompatActivity implements View.
      *
      * @param cardToken cardToken of card whose merchantHash and cardToken needs to be deleted from merchant server
      */
-    private void deleteMerchantHash(String cardToken)
-    {
+    private void deleteMerchantHash(String cardToken) {
 
         final String postParams = "card_token=" + cardToken;
 
@@ -951,10 +791,5 @@ public class DetailedCategoryActivity extends AppCompatActivity implements View.
         deleteMerchantHash(cardToken);
 
     }
-
-
-
-
-
 
 }

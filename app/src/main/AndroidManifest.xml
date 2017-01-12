@@ -40,7 +40,6 @@
         <activity
             android:name=".activities.ShoppingActivity"
             android:theme="@style/MyMaterialTheme" />
-
         <activity android:name=".activities.SingleTimeActivity" />
         <activity android:name=".activities.MyOrdersActivity" />
         <activity android:name=".activities.CancelActivity" />
@@ -52,11 +51,18 @@
         <activity android:name=".activities.CategoryActivity"/>
         <activity android:name=".activities.DetailedCategoryActivity" />
         <activity android:name=".activities.LocationActivity"/>
+        <activity android:name=".activities.FilterActivity" />
+        <activity android:name=".activities.CartActivity"/>
+        <activity android:name=".activities.ShortListCategory"/>
+        <activity android:name=".activities.RatingActivity"/>
+
+
+
+
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-        <activity android:name=".activities.FilterActivity" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB2SGOQIkxHuGwNyFq4DURkmJyAhkg6JMs" />

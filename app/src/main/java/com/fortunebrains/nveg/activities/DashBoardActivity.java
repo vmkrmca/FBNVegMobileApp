@@ -105,6 +105,7 @@ public class DashBoardActivity extends FragmentActivity implements View.OnClickL
 
         editor.putString("URI",""+uri);
         editor.putString("NAME",Name);
+
         editor.putInt("KEY",FBKEY);
         editor.commit();
 
@@ -195,8 +196,10 @@ public class DashBoardActivity extends FragmentActivity implements View.OnClickL
 
             Uri  uri = acct.getPhotoUrl();
             String Name = acct.getDisplayName();
+            String email = acct.getEmail();
             editor.putString("URI",""+uri);
             editor.putString("NAME",Name);
+
             editor.putInt("KEY",GKEY);
             editor.commit();
             startActivity(new Intent(getApplicationContext(),ShoppingActivity.class));

@@ -1,5 +1,6 @@
 package com.fortunebrains.nveg.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,7 +18,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.fortunebrains.nveg.R;
+import com.fortunebrains.nveg.activities.CartActivity;
 import com.fortunebrains.nveg.activities.DashBoardActivity;
+import com.fortunebrains.nveg.activities.ShortListCategory;
 import com.fortunebrains.nveg.adapters.CategoryAdapter;
 import com.fortunebrains.nveg.adapters.ImageViewPagerAdapter;
 import com.fortunebrains.nveg.common.Category;
@@ -64,12 +67,19 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
         ivNotifications = (ImageView)view. findViewById(R.id.ivNotifications);
         ivProfile = (ImageView) view.findViewById(R.id.ivProfile);
 
-        gridView = (GridView) view.findViewById(R.id.gvCategories);
-//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),LinearLayoutManager.VERTICAL);
-//        recyclerView.addItemDecoration(dividerItemDecoration);
-        final ArrayList<Category> categoryArrayList = prepareData();
-        CategoryAdapter adapter = new CategoryAdapter(getActivity(),categoryArrayList);
-        gridView.setAdapter(adapter);
+        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.card_recycler_view);
+        recyclerView.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(manager);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
+        recyclerView.setLayoutManager(layoutManager);
+
+        ArrayList<Category> androidVersions = prepareData();
+        CategoryAdapter adapter = new CategoryAdapter(getActivity(),androidVersions);
+        recyclerView.setAdapter(adapter);
+
+
 
 
         ivHome.setOnClickListener(this);
@@ -108,10 +118,11 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
             case R.id.ivFav:
                 title = "Favourites";
 
+                getActivity().startActivity(new Intent(getActivity() , ShortListCategory.class));
                 break;
             case R.id.ivCart:
                 title = "Cart";
-
+                getActivity().startActivity(new Intent(getActivity() , CartActivity.class));
                 break;
             case R.id.ivNotifications:
                 title = "Notifications";

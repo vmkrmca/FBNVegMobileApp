@@ -9,12 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.fortunebrains.nveg.R;
+import com.fortunebrains.nveg.activities.CartActivity;
 import com.fortunebrains.nveg.activities.DetailedCategoryActivity;
+import com.fortunebrains.nveg.activities.RatingActivity;
 import com.fortunebrains.nveg.common.CategoryData;
 import com.fortunebrains.nveg.common.MyCancelOrders;
+import com.fortunebrains.nveg.database.DBHelper;
 
 import java.util.List;
 
@@ -27,6 +31,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder
     {
+        DBHelper dbHelper = null;
         public TextView tvCategoryName, tvCategoryLocation, tvCategoryType,tvAmount,tvItemLocation;
         ImageView ivCategoryImage, ivFav, ivCart, ivRate;
         ElegantNumberButton button;
@@ -34,6 +39,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         public MyViewHolder(View view)
         {
             super(view);
+            dbHelper = new DBHelper(mContext);
             tvCategoryName = (TextView) view.findViewById(R.id.tvItemName);
             tvCategoryLocation = (TextView) view.findViewById(R.id.tvItemLocation);
             tvCategoryType = (TextView) view.findViewById(R.id.tvItemType);
@@ -55,6 +61,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
         this.mContext = mCtx;
         this.categoryDataList = categoryDataList;
+
 
     }
 
@@ -85,10 +92,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             public void onClick(View view)
             {
                 String number = holder.button.getNumber();
-               /* Log.i("Number ::",number);
-                int Num = Integer.parseInt(number);
-                num = Integer.parseInt(holder.tvAmount.getText().toString());
-                Log.i("Number",""+num);*/
+
 
 
             }
@@ -100,6 +104,8 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
 
                String amount = categoryDataList.get(position).getCategoryAmt();
+                String cName = categoryDataList.get(position).getCategoryName();
+
                num = Integer.parseInt(amount);
 
                 if (newValue==0)
@@ -110,6 +116,17 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
                 {
                     int balAmount = newValue * num;
                     holder.tvAmount.setText(""+balAmount);
+
+                    long id = holder.dbHelper.addCartItems(String.valueOf(position),cName,String.valueOf(balAmount),String.valueOf(newValue));
+                    if (id!=-1)
+                    {
+                        Toast.makeText(mContext,"Item Added",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        long Updateid = holder.dbHelper.updateCartItem(String.valueOf(position),cName,String.valueOf(balAmount),String.valueOf(newValue));
+                        Toast.makeText(mContext,"Item Updated",Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }
@@ -122,6 +139,32 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
                 Intent i = new Intent(mContext,DetailedCategoryActivity.class);
                 i.putExtra("Location",categoryDataList.get(position).getLocation());
                 mContext.startActivity(i);
+            }
+        });
+
+        holder.ivCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mContext.startActivity(new Intent(mContext, CartActivity.class));
+            }
+        });
+
+        holder.ivFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Toast.makeText(mContext,"Item is Added as ShortList",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        holder.ivRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i2 = new Intent(mContext,RatingActivity.class);
+                mContext.startActivity(i2);
             }
         });
 

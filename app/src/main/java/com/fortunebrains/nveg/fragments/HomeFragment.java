@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 import com.fortunebrains.nveg.R;
 import com.fortunebrains.nveg.activities.CartActivity;
 import com.fortunebrains.nveg.activities.DashBoardActivity;
+import com.fortunebrains.nveg.activities.ProfileActivity;
+import com.fortunebrains.nveg.activities.ShoppingActivity;
 import com.fortunebrains.nveg.activities.ShortListCategory;
 import com.fortunebrains.nveg.adapters.CategoryAdapter;
 import com.fortunebrains.nveg.adapters.ImageViewPagerAdapter;
@@ -66,9 +69,9 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
         ivFav = (ImageView) view.findViewById(R.id.ivFav);
         ivNotifications = (ImageView)view. findViewById(R.id.ivNotifications);
         ivProfile = (ImageView) view.findViewById(R.id.ivProfile);
-
         RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.card_recycler_view);
         recyclerView.setHasFixedSize(true);
+
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
@@ -111,28 +114,19 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
         String title ="";
         switch (v.getId()) {
             case R.id.ivHome:
-                fragment = new HomeFragment();
-                title = "Home";
-
                 break;
             case R.id.ivFav:
-                title = "Favourites";
-
                 getActivity().startActivity(new Intent(getActivity() , ShortListCategory.class));
                 break;
             case R.id.ivCart:
-                title = "Cart";
                 getActivity().startActivity(new Intent(getActivity() , CartActivity.class));
                 break;
             case R.id.ivNotifications:
-                title = "Notifications";
                 break;
             case R.id.ivProfile:
-                fragment = new ProfileFragment();
-                title = "Profile";
+                getActivity().startActivity(new Intent(getActivity() , ProfileActivity.class));
                 break;
         }
-
         if (fragment != null)
         {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

@@ -52,14 +52,9 @@ public class DashBoardActivity extends FragmentActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-
         setContentView(R.layout.activity_dashboard_screen);
-
         intialViewControls();
         Log.i("FBLogin",""+isLoggedIn());
-
-
         loginButton = (LoginButton) findViewById(R.id.login_button);
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {

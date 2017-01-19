@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tvHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Home"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_height="2dp"
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:id="@+id/llOffers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.85"
+                        android:padding="8dp"
+                        android:text="Order By Categories"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvOPlus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="+"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvOMinus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="-"
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_height="2dp"
+                    android:layout_width="match_parent"
+                    android:background="@android:color/darker_gray" />
+                <LinearLayout
+                    android:id="@+id/llSOffers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.85"
+                        android:padding="8dp"
+                        android:text="Chicken"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+                    <View
+                        android:layout_height="2dp"
+                        android:layout_width="match_parent"
+                        android:background="@android:color/darker_gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.85"
+                        android:padding="8dp"
+                        android:text="Mutton"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+                    <View
+                        android:layout_height="2dp"
+                        android:layout_width="match_parent"
+                        android:background="@android:color/darker_gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.85"
+                        android:padding="8dp"
+                        android:text="Sea Food"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+                    <View
+                        android:layout_height="2dp"
+                        android:layout_width="match_parent"
+                        android:background="@android:color/darker_gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.85"
+                        android:padding="8dp"
+                        android:text="Eggs"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+                    <View
+                        android:layout_height="2dp"
+                        android:layout_width="match_parent"
+                        android:background="@android:color/darker_gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.85"
+                        android:padding="8dp"
+                        android:text="Exotic Meats"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_height="2dp"
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:id="@+id/llHotDeals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.85"
+                        android:padding="8dp"
+                        android:text="Hot Deals"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvHPlus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="+"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvHMinus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="-"
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_height="2dp"
+                    android:layout_width="match_parent"
+                    android:background="@android:color/darker_gray" />
+                <LinearLayout
+                    android:id="@+id/llSHoteDeals"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.85"
+                        android:padding="8dp"
+                        android:text="NVeg Coupons"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+                    <View
+                        android:layout_height="2dp"
+                        android:layout_width="match_parent"
+                        android:background="@android:color/darker_gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.85"
+                        android:padding="8dp"
+                        android:text="Today Special"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+                    <View
+                        android:layout_height="2dp"
+                        android:layout_width="match_parent"
+                        android:background="@android:color/darker_gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="0.85"
+                        android:padding="8dp"
+                        android:text="Bulk Buy"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_height="2dp"
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray" />
+
+
+            <TextView
+                android:id="@+id/tvOffers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Order by Offers"
+                android:textColor="#000"
+                android:textSize="18sp" />
+            <View
+                android:layout_height="2dp"
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/tvNveg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="NVeg"
+                android:textColor="#000"
+                android:textSize="18sp" />
+            <View
+                android:layout_height="2dp"
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/tvInvite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Invite"
+                android:textColor="#000"
+                android:textSize="18sp" />
+            <View
+                android:layout_height="2dp"
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/tvRateUs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="RateUs"
+                android:textColor="#000"
+                android:textSize="18sp" />
+            <View
+                android:layout_height="2dp"
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/tvFeedBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Feedback"
+                android:textColor="#000"
+                android:textSize="18sp" />
+            <View
+                android:layout_height="2dp"
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/tvAboutUs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="AboutUs"
+                android:textColor="#000"
+                android:textSize="18sp" />
+            <View
+                android:layout_height="2dp"
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/tvHelp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Help"
+                android:textColor="#000"
+                android:textSize="18sp" />
+            <View
+                android:layout_height="2dp"
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/tvContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Contact Us"
+                android:textColor="#000"
+                android:textSize="18sp" />
+            <View
+                android:layout_height="2dp"
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/tvLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Logout"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

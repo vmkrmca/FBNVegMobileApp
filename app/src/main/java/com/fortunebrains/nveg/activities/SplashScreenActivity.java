@@ -20,8 +20,6 @@ public class SplashScreenActivity extends Activity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
         setContentView(R.layout.activity_splash_screen);
 
         new Handler().postDelayed(new Runnable()
@@ -33,6 +31,7 @@ public class SplashScreenActivity extends Activity {
                 {
                     Intent i = new Intent(SplashScreenActivity.this, ShoppingActivity.class);
                     startActivity(i);
+                    finish();
 
                 }
                 else

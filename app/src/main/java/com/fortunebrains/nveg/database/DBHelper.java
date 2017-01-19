@@ -22,6 +22,7 @@ public class DBHelper extends SQLiteOpenHelper
     public void onCreate(SQLiteDatabase db)
     {
         db.execSQL("create table addCartTbl(itemPos Integer Primary key,itemName Text,itemCost Text,itemCount Text)");
+        db.execSQL("create table addFavTbl(itemPos Integer Primary key,itemName Text,itemLocation Text,itemType Text,itemCost Text,itemCount Text)");
     }
 
     @Override
@@ -38,6 +39,23 @@ public class DBHelper extends SQLiteOpenHelper
         long id = db.insert("addCartTbl",null,contentValues);
         return id;
     }
+
+    public long addFavItems(String itemPos,String itemName,String itemType,String itemLocation,String itemCost,String itemCount)
+    {
+        db = this.getWritableDatabase();
+        ContentValues contentValues  =new ContentValues();
+        contentValues.put("itemPos",itemPos);
+        contentValues.put("itemName",itemName);
+        contentValues.put("itemLocation",itemLocation);
+        contentValues.put("itemType",itemType);
+        contentValues.put("itemCost",itemCost);
+        contentValues.put("itemCount",itemCount);
+        long id = db.insert("addFavTbl",null,contentValues);
+        return id;
+    }
+
+
+
 
 
     public  long updateCartItem(String pos,String itemName,String itemCost,String itemCount)

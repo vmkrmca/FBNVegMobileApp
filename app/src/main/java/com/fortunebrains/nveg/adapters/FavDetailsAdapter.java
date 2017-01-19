@@ -3,9 +3,6 @@ package com.fortunebrains.nveg.adapters;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,25 +14,20 @@ import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.fortunebrains.nveg.R;
-import com.fortunebrains.nveg.activities.CartActivity;
-import com.fortunebrains.nveg.activities.DetailedCategoryActivity;
-import com.fortunebrains.nveg.activities.RatingActivity;
 import com.fortunebrains.nveg.activities.ShoppingActivity;
 import com.fortunebrains.nveg.common.CartDetails;
-import com.fortunebrains.nveg.common.CategoryData;
+import com.fortunebrains.nveg.common.FavDetails;
 import com.fortunebrains.nveg.database.DBHelper;
-import com.fortunebrains.nveg.fragments.HomeFragment;
 
 import java.util.List;
 
 /**
- * Created by sree on 1/12/2017.
+ * Created by sree on 1/16/2017.
  */
-
-public class CartDetailsAdapter extends RecyclerView.Adapter<CartDetailsAdapter.MyViewHolder>
+public class FavDetailsAdapter extends RecyclerView.Adapter<FavDetailsAdapter.MyViewHolder>
 {
 
-    private List<CartDetails> cartDetailsList;
+    private List<FavDetails> favDetailsList;
     Context mContext;
 
     public static int num = 0;
@@ -62,24 +54,24 @@ public class CartDetailsAdapter extends RecyclerView.Adapter<CartDetailsAdapter.
 
         }
     }
-    public CartDetailsAdapter(Context mCtx,List<CartDetails> categoryDataList) {
+    public FavDetailsAdapter(Context mCtx,List<FavDetails> favDetailsList) {
 
         this.mContext = mCtx;
-        this.cartDetailsList = categoryDataList;
+        this.favDetailsList = favDetailsList;
     }
     @Override
-    public CartDetailsAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FavDetailsAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.add_cart_row, parent, false);
-        return new MyViewHolder(itemView);
+        return new FavDetailsAdapter.MyViewHolder(itemView);
     }
     @Override
-    public void onBindViewHolder(final CartDetailsAdapter.MyViewHolder holder, final int position) {
-        CartDetails categoryData = cartDetailsList.get(position);
-        holder.tvItemName.setText(categoryData.getItemName());
-        holder.tvAmount.setText(categoryData.getItemCost());
+    public void onBindViewHolder(final FavDetailsAdapter.MyViewHolder holder, final int position) {
+        FavDetails favDetails = favDetailsList.get(position);
+        holder.tvItemName.setText(favDetails.getItemName());
+        holder.tvAmount.setText(favDetails.getItemCost());
         holder.ivCategoryImage.setImageResource(R.mipmap.chicken);
-        holder.button.setNumber(categoryData.getItemCount());
+        holder.button.setNumber(favDetails.getItemCount());
 
         holder.ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +111,7 @@ public class CartDetailsAdapter extends RecyclerView.Adapter<CartDetailsAdapter.
 
     @Override
     public int getItemCount() {
-        return cartDetailsList.size();
+        return favDetailsList.size();
     }
 }
+

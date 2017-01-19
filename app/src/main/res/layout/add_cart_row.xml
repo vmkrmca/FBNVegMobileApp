@@ -66,9 +66,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.2"
                         android:layout_width="0dp"
-                        android:src="@android:drawable/ic_delete"
-
-                        />
+                        android:src="@android:drawable/ic_delete" />
                 </LinearLayout>
 
 
@@ -94,7 +92,6 @@
                         android:layout_weight="0.5"
                         android:layout_gravity="center"
                         android:layout_height="35dp"
-                        app:backGroundColor="@android:color/holo_red_dark"
                         android:id="@+id/enbNumber" />
 
                     <TextView

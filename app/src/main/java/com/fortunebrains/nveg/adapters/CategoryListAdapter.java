@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.fortunebrains.nveg.R;
 import com.fortunebrains.nveg.activities.CartActivity;
@@ -82,7 +83,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         holder.tvItemLocation.setText(categoryData.getLocation());
         holder.tvAmount.setText(categoryData.getCategoryAmt());
 
-        holder.ivCategoryImage.setBackgroundResource(categoryData.getCategoryImage());
+        Glide.with(mContext).load(categoryDataList.get(position).getCategoryImage()).asBitmap().centerCrop().override(75, 75).into(holder.ivCategoryImage);
         holder.ivRate.setImageResource(R.mipmap.ic_starrate);
         holder.ivFav.setImageResource(R.mipmap.ic_favorite);
         holder.ivCart.setImageResource(R.mipmap.ic_shoppingcart);
@@ -92,9 +93,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             public void onClick(View view)
             {
                 String number = holder.button.getNumber();
-
-
-
             }
         });
 
@@ -104,11 +102,10 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
 
                String amount = categoryDataList.get(position).getCategoryAmt();
-                String cName = categoryDataList.get(position).getCategoryName();
+               String cName = categoryDataList.get(position).getCategoryName();
 
                num = Integer.parseInt(amount);
-
-                if (newValue==0)
+               if (newValue==0)
                 {
                     holder.tvAmount.setText(""+num);
                 }
@@ -154,7 +151,19 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             @Override
             public void onClick(View v)
             {
-                Toast.makeText(mContext,"Item is Added as ShortList",Toast.LENGTH_SHORT).show();
+                String cName = categoryDataList.get(position).getCategoryName();
+                String cAmount = categoryDataList.get(position).getCategoryAmt();
+                String cLoc = categoryDataList.get(position).getLocation();
+                String cType = categoryDataList.get(position).getCategoryType();
+                String number = holder.button.getNumber();
+
+
+                long id = holder.dbHelper.addFavItems(String.valueOf(position),cName,cType,cLoc,cAmount,number);
+                if (id!=-1)
+                {
+                    Toast.makeText(mContext,"Item is Added as ShortList",Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });

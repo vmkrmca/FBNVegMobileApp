@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
 
 
 
@@ -22,7 +23,7 @@
             android:layout_weight="0.5"
             android:text="Name "
             android:padding="8dp"
-            android:textColor="#000"
+            android:textColor="#FFF"
             android:textStyle="bold"
             />
         <EditText
@@ -51,7 +52,7 @@
             android:layout_weight="0.5"
             android:text="Email "
             android:padding="8dp"
-            android:textColor="#000"
+            android:textColor="#FFF"
             android:textStyle="bold"
             />
 
@@ -81,7 +82,7 @@
             android:layout_weight="0.5"
             android:text="Phone "
             android:padding="8dp"
-            android:textColor="#000"
+            android:textColor="#FFF"
             android:textStyle="bold"
             />
         <EditText

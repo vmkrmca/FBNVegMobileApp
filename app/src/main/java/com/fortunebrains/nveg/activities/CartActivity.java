@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -69,7 +70,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     DBHelper dbHelper = null;
     SQLiteDatabase db;
 
-
+    LinearLayout llCheckOut;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,12 +84,13 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.setDisplayShowTitleEnabled(false);
         LayoutInflater mInflater = LayoutInflater.from(this);
-
+        llCheckOut = (LinearLayout) findViewById(R.id.llCheckOut);
         View mCustomView = mInflater.inflate(R.layout.custom_action_bar, null);
 
         hideKeyBoard(mCustomView);
          ivBack = (ImageView) mCustomView.findViewById(R.id.ivBack);
         TextView tvTitle = (TextView) mCustomView.findViewById(R.id.tvTitle);
+
         tvTitle.setText("Cart Details");
         tvCheckOut = (TextView) findViewById(R.id.tvCheckOut);
         tvData = (TextView) findViewById(R.id.tvData);
@@ -112,6 +114,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             rvCartDetails.setVisibility(View.GONE);
             tvData.setVisibility(View.VISIBLE);
             tvCheckOut.setVisibility(View.GONE);
+            llCheckOut.setVisibility(View.GONE);
         }
 
     }

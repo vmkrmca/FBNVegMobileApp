@@ -460,10 +460,8 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
     }
-
     @Override
     public void onConnectionSuspended(int i) {}
-
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
 }

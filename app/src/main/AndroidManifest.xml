@@ -56,11 +56,11 @@
         <activity android:name=".activities.ShortListCategory"/>
         <activity android:name=".activities.RatingActivity"/>
         <activity android:name=".activities.ProfileActivity"/>
-
-
-
-
-
+        <activity android:name=".activities.InvesterLoginActivty"/>
+        <activity android:name=".activities.BToBLoginActivty"/>
+        <activity android:name=".activities.UsersLoginActivity"/>
+        <activity android:name=".activities.InvesterSignUpActivity"/>
+        <activity android:name=".activities.AgreeMentActivity"/>
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

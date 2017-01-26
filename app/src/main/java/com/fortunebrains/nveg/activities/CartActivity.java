@@ -88,7 +88,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         View mCustomView = mInflater.inflate(R.layout.custom_action_bar, null);
 
         hideKeyBoard(mCustomView);
-         ivBack = (ImageView) mCustomView.findViewById(R.id.ivBack);
+        ivBack = (ImageView) mCustomView.findViewById(R.id.ivBack);
         TextView tvTitle = (TextView) mCustomView.findViewById(R.id.tvTitle);
 
         tvTitle.setText("Cart Details");
@@ -136,12 +136,9 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                     cartDetails.setPos(cursor.getString(cursor.getColumnIndex("itemPos")));
                     cartDetails.setItemCount(cursor.getString(cursor.getColumnIndex("itemCount")));
                     cartDetailsArrayList.add(cartDetails);
-
                 }while (cursor.moveToNext());
             }
         }
-
-
     }
 
     private void payuMoneyCode() {

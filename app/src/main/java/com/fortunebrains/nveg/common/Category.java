@@ -8,7 +8,6 @@ public class Category
 {
     int categoryImage;
 
-
     public int getCategoryImage() {
         return categoryImage;
     }

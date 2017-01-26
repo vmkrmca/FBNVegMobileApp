@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,19 +34,18 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     public class MyViewHolder extends RecyclerView.ViewHolder
     {
         DBHelper dbHelper = null;
-        public TextView tvCategoryName, tvCategoryLocation, tvCategoryType,tvAmount,tvItemLocation;
+        public TextView tvCategoryName, tvAmount;
         ImageView ivCategoryImage, ivFav, ivCart, ivRate;
         ElegantNumberButton button;
+        Spinner spItemType;
 
         public MyViewHolder(View view)
         {
             super(view);
             dbHelper = new DBHelper(mContext);
             tvCategoryName = (TextView) view.findViewById(R.id.tvItemName);
-            tvCategoryLocation = (TextView) view.findViewById(R.id.tvItemLocation);
-            tvCategoryType = (TextView) view.findViewById(R.id.tvItemType);
+            spItemType = (Spinner) view.findViewById(R.id.spItemType);
             tvAmount = (TextView) view.findViewById(R.id.tvAmount);
-            tvItemLocation = (TextView) view.findViewById(R.id.tvItemLocation);
             button = (ElegantNumberButton) view.findViewById(R.id.enbNumber);
             ivCategoryImage = (ImageView) view.findViewById(R.id.ivCategoryImage);
             ivFav = (ImageView) view.findViewById(R.id.ivFav);
@@ -78,9 +78,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         CategoryData categoryData = categoryDataList.get(position);
         holder.tvCategoryName.setText(categoryData.getCategoryName());
-        holder.tvCategoryLocation.setText(categoryData.getLocation());
-        holder.tvCategoryType.setText(categoryData.getCategoryType());
-        holder.tvItemLocation.setText(categoryData.getLocation());
         holder.tvAmount.setText(categoryData.getCategoryAmt());
 
         Glide.with(mContext).load(categoryDataList.get(position).getCategoryImage()).asBitmap().centerCrop().override(75, 75).into(holder.ivCategoryImage);
@@ -158,7 +155,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
                 String number = holder.button.getNumber();
 
 
-                long id = holder.dbHelper.addFavItems(String.valueOf(position),cName,cType,cLoc,cAmount,number);
+                long id = holder.dbHelper.addFavItems(String.valueOf(position),cName,cType,"HYD",cAmount,number);
                 if (id!=-1)
                 {
                     Toast.makeText(mContext,"Item is Added as ShortList",Toast.LENGTH_SHORT).show();

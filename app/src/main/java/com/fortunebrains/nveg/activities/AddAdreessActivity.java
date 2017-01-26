@@ -12,9 +12,7 @@ import android.widget.TextView;
 
 import com.fortunebrains.nveg.R;
 
-/**
- * Created by sree on 1/5/2017.
- */
+
 public class AddAdreessActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

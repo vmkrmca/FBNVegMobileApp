@@ -23,30 +23,25 @@ public class MyCancelAdapter extends RecyclerView.Adapter<MyCancelAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tvOrderID,tvOrderDTime,tvDelveryOrder,tvOrderPrice,tvAction;
 
-        public MyViewHolder(View view) {
+        public MyViewHolder(View view)
+        {
             super(view);
             tvOrderID = (TextView) view.findViewById(R.id.tvOrderID);
             tvOrderDTime = (TextView) view.findViewById(R.id.tvOrderDTime);
             tvDelveryOrder = (TextView) view.findViewById(R.id.tvDelveryOrder);
             tvOrderPrice = (TextView) view.findViewById(R.id.tvOrderPrice);
             tvAction = (TextView) view.findViewById(R.id.tvAction);
-
         }
     }
-
-
     public MyCancelAdapter(List<MyCancelOrders> myOrderList) {
         this.myCancelOrdersList = myOrderList;
     }
-
     @Override
     public MyCancelAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.myorder_row, parent, false);
-
         return new MyCancelAdapter.MyViewHolder(itemView);
     }
-
     @Override
     public void onBindViewHolder(MyCancelAdapter.MyViewHolder holder, int position) {
         MyCancelOrders myOrder = myCancelOrdersList.get(position);
@@ -55,9 +50,7 @@ public class MyCancelAdapter extends RecyclerView.Adapter<MyCancelAdapter.MyView
         holder.tvDelveryOrder.setText(myOrder.getDeliveryDateTime());
         holder.tvOrderDTime.setText(myOrder.getOrderAmount());
         holder.tvAction.setText(myOrder.getOrderAction());
-
     }
-
     @Override
     public int getItemCount() {
         return myCancelOrdersList.size();

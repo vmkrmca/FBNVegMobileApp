@@ -6,6 +6,9 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
@@ -14,6 +17,7 @@ import com.fortunebrains.nveg.R;
 public class SplashScreenActivity extends Activity {
 
     private static final long SPLASH_TIME_OUT = 2000;
+    ImageView ivImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +26,21 @@ public class SplashScreenActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash_screen);
 
-        new Handler().postDelayed(new Runnable()
-        {
+        ivImage = (ImageView) findViewById(R.id.ivImage);
+
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.splash_anim);
+        ivImage.setAnimation(animation);
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void run()
-            {
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+                finish();
                 if (isLoggedIn())
                 {
                     Intent i = new Intent(SplashScreenActivity.this, ShoppingActivity.class);
@@ -36,15 +50,20 @@ public class SplashScreenActivity extends Activity {
                 }
                 else
                 {
-                    Intent i = new Intent(SplashScreenActivity.this, DashBoardActivity.class);
+                    Intent i = new Intent(SplashScreenActivity.this, UsersLoginActivity.class);
                     startActivity(i);
                     finish();
                 }
 
             }
-        }, SPLASH_TIME_OUT);
-    }
 
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+    }
 
     public boolean isLoggedIn() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();

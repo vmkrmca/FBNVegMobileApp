@@ -23,9 +23,7 @@ import com.fortunebrains.nveg.fragments.CustomerFragment;
 import com.fortunebrains.nveg.fragments.WalletFragment;
 import com.squareup.picasso.Picasso;
 
-/**
- * Created by sree on 1/12/2017.
- */
+
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     SharedPreferences sharedPreferences;

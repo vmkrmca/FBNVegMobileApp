@@ -60,9 +60,25 @@
     <string name="title_help">Help</string>
     <string name="title_contact">ContactUs</string>
 
+    <string name="facebook_app_id">826844830786751</string>
+    <string name="sign_up"> SIgnUp &lt;u>underline&lt;/u></string>
+    <string name="for_password">Forgot Password &lt;u>underline&lt;/u></string>
 
+    <string-array name="cut_types">
 
-    <string name="facebook_app_id">957143471052541</string>
+        <item>Boneless</item>
+        <item>Boneless</item>
+        <item>Boneless</item>
+    </string-array>
 
+    <string-array name="state">
+        <item>AndhraPradesh</item>
+        <item>Telagana</item>
+        <item>TamilNadu</item>
+        <item>Karnataka</item>
+        <item>Oddisa</item>
+        <item>Maharastra</item>
+        <item>MadhyaPradesh</item>
+    </string-array>
 
 </resources>
